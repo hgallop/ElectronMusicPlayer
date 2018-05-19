@@ -1,5 +1,6 @@
 package com.example.android.electronmusicplayer;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +22,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AlbumActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        songs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SongActivity.class);
                 startActivity(intent);
             }
         });
