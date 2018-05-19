@@ -1,8 +1,12 @@
 package com.example.android.electronmusicplayer;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -44,5 +48,15 @@ public class AlbumActivity extends AppCompatActivity {
         AlbumAdapter albumAdapter = new AlbumAdapter(this, music);
 
         musicList.setAdapter(albumAdapter);
+
+        musicList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(AlbumActivity.this, SongActivity.class);
+                intent.putExtra("pos", position);
+                startActivity(intent);
+            }
+        });
     }
 }
