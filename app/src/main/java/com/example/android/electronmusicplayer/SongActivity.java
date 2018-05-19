@@ -246,7 +246,7 @@ public class SongActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Intent intent = new Intent(SongActivity.this, NowPlayingActivity.class);
-                intent.putExtra("pos", position);
+                intent.putExtra(POS, position);
                 startActivity(intent);
             }
         });
