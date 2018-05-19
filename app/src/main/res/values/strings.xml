@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">Electron Music Player</string>
+    <string name="music">Albums</string>
+    <string name="songs">Songs</string>
+    <string name="now_playing">Now Playing</string>
+
+    <!--Music Info-->
+    <string name="bensound_sample_hits">Bensound: Sample Hits</string>
+    <string name="sample_description">A collection of royalty free music by Bensound.com</string>
+    <string name="generic_one">Generic One: Generic Album</string>
+    <string name="generic_two">Generic Two: Generic Album</string>
+    <string name="generic_three">Generic Three: Generic Album</string>
+    <string name="generic_four">Generic Four: Generic Album</string>
+    <string name="generic_five">Generic Five: Generic Album</string>
+    <string name="generic_six">Generic Six: Generic Album</string>
+    <string name="generic_seven">Generic Seven: Generic Album</string>
+    <string name="generic_desc">A generic artist playing generic music.</string>
+
+    <!--Song info-->
+    <string name="ukulele">Ukulele</string>
+    <string name="new_beginning">A New Beginning</string>
+    <string name="summer">Summer</string>
+    <string name="creative_minds">Creative Minds</string>
+    <string name="cute">Cute</string>
+    <string name="happy_rock">Happy Rock</string>
+    <string name="jazzy_frenchy">Jazzy Frenchy</string>
+    <string name="little_idea">Little Idea</string>
+    <string name="generic_song">Generic Song</string>
 </resources>
