@@ -3,6 +3,7 @@ package com.example.android.electronmusicplayer;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -230,5 +231,11 @@ public class SongActivity extends AppCompatActivity {
                         getResources().getString(R.string.generic_seven)));
                 break;
         }
+
+        ListView musicList = findViewById(R.id.list);
+
+        SongAdapter songAdapter = new SongAdapter(this, music);
+
+        musicList.setAdapter(songAdapter);
     }
 }
