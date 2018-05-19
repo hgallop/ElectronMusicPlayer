@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    android:id="@+id/album_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorPrimaryDark"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/albumArt"
+        style="@style/AlbumArt"
+        android:contentDescription="@string/description"
+        android:layout_width="@dimen/album_width"
+        android:layout_height="@dimen/album_height"
+        tools:src="@drawable/bensound_album_cover"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/albumTitle"
+        style="@style/AlbumInfo.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="@string/bensound_sample_hits"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/albumArt" />
+
+    <TextView
+        android:id="@+id/albumInformation"
+        style="@style/AlbumInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="@string/sample_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/albumTitle" />
+
+</android.support.constraint.ConstraintLayout>
