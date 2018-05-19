@@ -16,6 +16,7 @@ public class AlbumActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.music_list);
 
         ArrayList<Music> music = new ArrayList<>();
 
