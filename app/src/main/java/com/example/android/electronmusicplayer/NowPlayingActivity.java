@@ -1,10 +1,8 @@
 package com.example.android.electronmusicplayer;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -17,11 +15,11 @@ import java.util.ArrayList;
 
 public class NowPlayingActivity extends AppCompatActivity {
 
-    private final String POS = "pos";
-    private final String IMAGE = "imageId";
-    private final String SONG = "song";
-    private final String ALBUM = "album";
-    private final String ID = "id";
+    private static final String POS = "pos";
+    private static final String IMAGE = "imageId";
+    private static final String SONG = "song";
+    private static final String ALBUM = "album";
+    private static final String ID = "id";
 
     boolean playing;
     boolean paused;
@@ -112,8 +110,6 @@ public class NowPlayingActivity extends AppCompatActivity {
         skipBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.v("Position: ", position + "");
-                int next;
                 if(position > 0) {
                     position -= 1;
                 } else {
@@ -184,7 +180,6 @@ public class NowPlayingActivity extends AppCompatActivity {
         skipForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.v("Position: ", position + "");
                 if(position < music.size() - 1) {
                     position += 1;
                 } else {

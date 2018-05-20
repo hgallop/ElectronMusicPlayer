@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class AlbumActivity extends AppCompatActivity {
 
-    private final String ID = "id";
+    private static final String ID = "id";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

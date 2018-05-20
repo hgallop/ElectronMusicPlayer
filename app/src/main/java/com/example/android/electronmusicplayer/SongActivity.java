@@ -6,17 +6,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class SongActivity extends AppCompatActivity {
 
-    private final String POS = "pos";
-    private final String IMAGE = "imageId";
-    private final String SONG = "song";
-    private final String ALBUM = "album";
-    private final String ID = "id";
+    private static final String POS = "pos";
+    private static final String IMAGE = "imageId";
+    private static final String SONG = "song";
+    private static final String ALBUM = "album";
+    private static final String ID = "id";
 
     private static final int ALBUM_LENGTH = 8;
 

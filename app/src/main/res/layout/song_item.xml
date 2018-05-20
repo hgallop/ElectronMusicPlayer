@@ -10,9 +10,8 @@
 
     <ImageView
         android:id="@+id/songArt"
-        android:layout_marginTop="@dimen/between"
-        android:layout_marginLeft="@dimen/between"
-        android:layout_marginStart="@dimen/between"
+        style="@style/SongArt"
+        android:contentDescription="@string/description"
         android:layout_width="@dimen/song_width"
         android:layout_height="wrap_content"
         tools:contentDescription="Ukulele"
@@ -29,40 +28,34 @@
 
         <TextView
             android:id="@+id/songTitle"
+            style="@style/SongTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/spacing"
-            android:fontFamily="@font/skranji_regular"
-            android:textColor="@color/textColor"
-            android:textSize="@dimen/small_text"
             tools:text="@string/ukulele" />
 
         <TextView
             android:id="@+id/songAlbum"
+            style="@style/SongAlbum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/songTitle"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/between"
-            android:fontFamily="@font/skranji_regular"
-            android:textColor="@color/textColor"
-            android:textSize="@dimen/extra_sm_text"
             tools:text="@string/bensound_sample_hits" />
 
         <ImageView
             android:id="@+id/play"
             android:layout_width="@dimen/icon"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/icon"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
             android:layout_margin="@dimen/tiny"
-            tools:contentDescription="play"
+            tools:contentDescription="@string/play"
             android:src="@drawable/ic_play_circle_outline_black_48dp" />
 
     </RelativeLayout>
