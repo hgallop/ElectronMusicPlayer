@@ -1,10 +1,12 @@
 package com.example.android.electronmusicplayer;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -96,6 +98,9 @@ public class NowPlayingActivity extends AppCompatActivity {
         ImageButton stop = findViewById(R.id.stop);
         ImageButton fastForward = findViewById(R.id.fastforward);
         ImageButton skipForward = findViewById(R.id.skipforward);
+        Button home = findViewById(R.id.home);
+        Button songs = findViewById(R.id.songs);
+        Button albums = findViewById(R.id.albums);
 
         songImage.setImageResource(imageID);
         songName.setText(song);
@@ -194,6 +199,31 @@ public class NowPlayingActivity extends AppCompatActivity {
                 albumName.setText(album);
 
                 Toast.makeText(NowPlayingActivity.this, "Skip Forward", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NowPlayingActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        songs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NowPlayingActivity.this, SongActivity.class);
+                intent.putExtra(ID, identity);
+                startActivity(intent);
+            }
+        });
+
+        albums.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NowPlayingActivity.this, AlbumActivity.class);
+                startActivity(intent);
             }
         });
     }

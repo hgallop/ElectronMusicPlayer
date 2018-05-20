@@ -27,4 +27,6 @@
     <string name="little_idea">Little Idea</string>
     <string name="generic_song">Generic Song</string>
     <string name="description">album cover</string>
+    <string name="home">Home</string>
+    <string name="albums">Albums</string>
 </resources>

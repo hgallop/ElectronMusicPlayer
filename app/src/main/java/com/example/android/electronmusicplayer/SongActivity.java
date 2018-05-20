@@ -28,9 +28,9 @@ public class SongActivity extends AppCompatActivity {
         setContentView(R.layout.music_list);
 
         Intent intent = getIntent();
-        int position = intent.getIntExtra(POS, 0);
+        int identity = intent.getIntExtra(ID, 0);
 
-        switch (position) {
+        switch (identity) {
             case 0:
                 albumZero();
                 break;

@@ -8,10 +8,12 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final String POS ="pos";
+    private final String ID ="id";
     private final String IMAGE = "imageId";
     private final String SONG = "song";
     private final String ALBUM = "album";
+
+    int identity = 8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +35,8 @@ public class MainActivity extends AppCompatActivity {
         songs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int position = 8;
                 Intent intent = new Intent(MainActivity.this, SongActivity.class);
-                intent.putExtra(POS, position);
+                intent.putExtra(ID, identity);
                 startActivity(intent);
             }
         });
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(IMAGE, imageId);
                 intent.putExtra(SONG, song);
                 intent.putExtra(ALBUM, album);
+                intent.putExtra(ID, identity);
                 startActivity(intent);
 
             }

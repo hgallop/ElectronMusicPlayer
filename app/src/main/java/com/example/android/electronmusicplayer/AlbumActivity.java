@@ -11,14 +11,14 @@ import java.util.ArrayList;
 
 public class AlbumActivity extends AppCompatActivity {
 
-    private final String POS = "pos";
+    private final String ID = "id";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.music_list);
 
-        ArrayList<Music> music = new ArrayList<>();
+        final ArrayList<Music> music = new ArrayList<>();
 
         music.add(new Music(R.drawable.bensound_album_cover,
                 getResources().getString(R.string.bensound_sample_hits),
@@ -55,8 +55,10 @@ public class AlbumActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                int identity = music.get(position).getIdentity();
+
                 Intent intent = new Intent(AlbumActivity.this, SongActivity.class);
-                intent.putExtra(POS, position);
+                intent.putExtra(ID, identity);
                 startActivity(intent);
             }
         });

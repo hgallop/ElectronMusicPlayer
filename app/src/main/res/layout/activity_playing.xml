@@ -1,103 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:fillViewport="true"
     tools:context=".NowPlayingActivity">
 
-    <TextView
-        android:id="@+id/actionBar"
-        style="@style/PsuedoActionBar"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/now_playing" />
+        android:background="@drawable/gradient_background">
 
-    <ImageView
-        android:id="@+id/albumImage"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/album_height"
-        app:layout_constraintTop_toBottomOf="@id/actionBar"
-        android:src="@drawable/ukulele"/>
+        <TextView
+            android:id="@+id/actionBar"
+            style="@style/PsuedoActionBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/now_playing" />
 
-    <TextView
-        android:id="@+id/song"
-        style="@style/AlbumInfo.Title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="@string/ukulele"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/albumImage" />
+        <ImageView
+            android:id="@+id/albumImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/album_height"
+            android:src="@drawable/ukulele"
+            app:layout_constraintTop_toBottomOf="@id/actionBar" />
 
-    <TextView
-        android:id="@+id/album"
-        style="@style/AlbumInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="@string/bensound_sample_hits"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/song" />
+        <TextView
+            android:id="@+id/song"
+            style="@style/AlbumInfo.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/albumImage"
+            tools:text="@string/ukulele" />
 
-    <LinearLayout
-        android:id="@+id/buttonBar"
-        app:layout_constraintTop_toBottomOf="@+id/album"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/spacing"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/album"
+            style="@style/AlbumInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/song"
+            tools:text="@string/bensound_sample_hits" />
 
-        <ImageButton
-            android:id="@+id/skipback"
-            android:layout_width="@dimen/icon"
-            android:layout_height="@dimen/icon"
-            android:background="@drawable/border"
-            android:src="@drawable/ic_skip_previous_black_48dp"/>
+        <LinearLayout
+            android:id="@+id/buttonBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/album">
 
-        <ImageButton
-            android:id="@+id/rewind"
-            android:layout_width="@dimen/icon"
-            android:layout_height="@dimen/icon"
-            android:background="@drawable/border"
-            android:src="@drawable/ic_fast_rewind_black_48dp"/>
+            <ImageButton
+                android:id="@+id/skipback"
+                android:layout_width="@dimen/icon"
+                android:layout_height="@dimen/icon"
+                android:background="@drawable/border"
+                android:src="@drawable/ic_skip_previous_black_48dp" />
 
-        <ImageButton
-            android:id="@+id/play"
-            android:layout_width="@dimen/icon"
-            android:layout_height="@dimen/icon"
-            android:background="@drawable/border"
-            android:src="@drawable/ic_play_circle_filled_black_48dp"/>
+            <ImageButton
+                android:id="@+id/rewind"
+                android:layout_width="@dimen/icon"
+                android:layout_height="@dimen/icon"
+                android:background="@drawable/border"
+                android:src="@drawable/ic_fast_rewind_black_48dp" />
 
-        <ImageButton
-            android:id="@+id/pause"
-            android:layout_width="@dimen/icon"
-            android:layout_height="@dimen/icon"
-            android:background="@drawable/border"
-            android:src="@drawable/ic_pause_circle_outline_black_48dp"/>
+            <ImageButton
+                android:id="@+id/play"
+                android:layout_width="@dimen/icon"
+                android:layout_height="@dimen/icon"
+                android:background="@drawable/border"
+                android:src="@drawable/ic_play_circle_filled_black_48dp" />
 
-        <ImageButton
-            android:id="@+id/stop"
-            android:layout_width="@dimen/icon"
-            android:layout_height="@dimen/icon"
-            android:background="@drawable/border"
-            android:src="@drawable/ic_stop_black_48dp"/>
+            <ImageButton
+                android:id="@+id/pause"
+                android:layout_width="@dimen/icon"
+                android:layout_height="@dimen/icon"
+                android:background="@drawable/border"
+                android:src="@drawable/ic_pause_circle_outline_black_48dp" />
 
-        <ImageButton
-            android:id="@+id/fastforward"
-            android:layout_width="@dimen/icon"
-            android:layout_height="@dimen/icon"
-            android:background="@drawable/border"
-            android:src="@drawable/ic_fast_forward_black_48dp"/>
+            <ImageButton
+                android:id="@+id/stop"
+                android:layout_width="@dimen/icon"
+                android:layout_height="@dimen/icon"
+                android:background="@drawable/border"
+                android:src="@drawable/ic_stop_black_48dp" />
 
-        <ImageButton
-            android:id="@+id/skipforward"
-            android:layout_width="@dimen/icon"
-            android:layout_height="@dimen/icon"
-            android:background="@drawable/border"
-            android:src="@drawable/ic_skip_next_black_48dp"/>
+            <ImageButton
+                android:id="@+id/fastforward"
+                android:layout_width="@dimen/icon"
+                android:layout_height="@dimen/icon"
+                android:background="@drawable/border"
+                android:src="@drawable/ic_fast_forward_black_48dp" />
 
-    </LinearLayout>
+            <ImageButton
+                android:id="@+id/skipforward"
+                android:layout_width="@dimen/icon"
+                android:layout_height="@dimen/icon"
+                android:background="@drawable/border"
+                android:src="@drawable/ic_skip_next_black_48dp" />
 
-</android.support.constraint.ConstraintLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/buttonBar">
+
+            <Button
+                android:id="@+id/songs"
+                style="@style/PsuedoButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/songs" />
+
+            <Button
+                android:id="@+id/albums"
+                style="@style/PsuedoButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/albums" />
+
+            <Button
+                android:id="@+id/home"
+                style="@style/PsuedoButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home" />
+
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
