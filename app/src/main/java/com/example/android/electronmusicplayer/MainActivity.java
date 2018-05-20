@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final String POS ="pos";
     private final String IMAGE = "imageId";
     private final String SONG = "song";
     private final String ALBUM = "album";
@@ -32,7 +33,9 @@ public class MainActivity extends AppCompatActivity {
         songs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int position = 8;
                 Intent intent = new Intent(MainActivity.this, SongActivity.class);
+                intent.putExtra(POS, position);
                 startActivity(intent);
             }
         });

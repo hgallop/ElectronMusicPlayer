@@ -17,6 +17,8 @@ public class SongActivity extends AppCompatActivity {
     private final String SONG = "song";
     private final String ALBUM = "album";
 
+    private static final int ALBUM_LENGTH = 8;
+
     final ArrayList<Music> music = new ArrayList<>();
 
     @Override
@@ -27,214 +29,40 @@ public class SongActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int position = intent.getIntExtra(POS, 0);
 
-        switch(position) {
+        switch (position) {
             case 0:
-                music.add(new Music(R.drawable.a_new_beginning,
-                        getResources().getString(R.string.new_beginning),
-                        getResources().getString(R.string.bensound_sample_hits)));
-                music.add(new Music(R.drawable.creative_mind,
-                        getResources().getString(R.string.creative_minds),
-                        getResources().getString(R.string.bensound_sample_hits)));
-                music.add(new Music(R.drawable.cute,
-                        getResources().getString(R.string.cute),
-                        getResources().getString(R.string.bensound_sample_hits)));
-                music.add(new Music(R.drawable.happy_rock,
-                        getResources().getString(R.string.happy_rock),
-                        getResources().getString(R.string.bensound_sample_hits)));
-                music.add(new Music(R.drawable.jazzy_frenchy,
-                        getResources().getString(R.string.jazzy_frenchy),
-                        getResources().getString(R.string.bensound_sample_hits)));
-                music.add(new Music(R.drawable.little_idea,
-                        getResources().getString(R.string.little_idea),
-                        getResources().getString(R.string.bensound_sample_hits)));
-                music.add(new Music(R.drawable.summer,
-                        getResources().getString(R.string.summer),
-                        getResources().getString(R.string.bensound_sample_hits)));
-                music.add(new Music(R.drawable.ukulele,
-                        getResources().getString(R.string.ukulele),
-                        getResources().getString(R.string.bensound_sample_hits)));
+                albumZero();
                 break;
             case 1:
-                music.add(new Music(R.drawable.generic_cover,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_one)));
-                music.add(new Music(R.drawable.generic_cover,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_one)));
-                music.add(new Music(R.drawable.generic_cover,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_one)));
-                music.add(new Music(R.drawable.generic_cover,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_one)));
-                music.add(new Music(R.drawable.generic_cover,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_one)));
-                music.add(new Music(R.drawable.generic_cover,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_one)));
-                music.add(new Music(R.drawable.generic_cover,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_one)));
-                music.add(new Music(R.drawable.generic_cover,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_one)));
+                albumOne();
                 break;
             case 2:
-                music.add(new Music(R.drawable.generic_cover_two,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_two)));
-                music.add(new Music(R.drawable.generic_cover_two,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_two)));
-                music.add(new Music(R.drawable.generic_cover_two,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_two)));
-                music.add(new Music(R.drawable.generic_cover_two,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_two)));
-                music.add(new Music(R.drawable.generic_cover_two,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_two)));
-                music.add(new Music(R.drawable.generic_cover_two,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_two)));
-                music.add(new Music(R.drawable.generic_cover_two,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_two)));
-                music.add(new Music(R.drawable.generic_cover_two,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_two)));
+                albumTwo();
                 break;
             case 3:
-                music.add(new Music(R.drawable.generic_cover_3,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_three)));
-                music.add(new Music(R.drawable.generic_cover_3,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_three)));
-                music.add(new Music(R.drawable.generic_cover_3,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_three)));
-                music.add(new Music(R.drawable.generic_cover_3,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_three)));
-                music.add(new Music(R.drawable.generic_cover_3,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_three)));
-                music.add(new Music(R.drawable.generic_cover_3,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_three)));
-                music.add(new Music(R.drawable.generic_cover_3,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_three)));
-                music.add(new Music(R.drawable.generic_cover_3,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_three)));
-                music.add(new Music(R.drawable.generic_cover_3,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_three)));
+                albumThree();
                 break;
             case 4:
-                music.add(new Music(R.drawable.generic_cover_four,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_four)));
-                music.add(new Music(R.drawable.generic_cover_four,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_four)));
-                music.add(new Music(R.drawable.generic_cover_four,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_four)));
-                music.add(new Music(R.drawable.generic_cover_four,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_four)));
-                music.add(new Music(R.drawable.generic_cover_four,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_four)));
-                music.add(new Music(R.drawable.generic_cover_four,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_four)));
-                music.add(new Music(R.drawable.generic_cover_four,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_four)));
-                music.add(new Music(R.drawable.generic_cover_four,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_four)));
+                albumFour();
                 break;
             case 5:
-                music.add(new Music(R.drawable.generic_cover_five,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_five)));
-                music.add(new Music(R.drawable.generic_cover_five,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_five)));
-                music.add(new Music(R.drawable.generic_cover_five,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_five)));
-                music.add(new Music(R.drawable.generic_cover_five,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_five)));
-                music.add(new Music(R.drawable.generic_cover_five,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_five)));
-                music.add(new Music(R.drawable.generic_cover_five,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_five)));
-                music.add(new Music(R.drawable.generic_cover_five,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_five)));
-                music.add(new Music(R.drawable.generic_cover_five,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_five)));
+                albumFive();
                 break;
             case 6:
-                music.add(new Music(R.drawable.generic_cover_six,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_six)));
-                music.add(new Music(R.drawable.generic_cover_six,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_six)));
-                music.add(new Music(R.drawable.generic_cover_six,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_six)));
-                music.add(new Music(R.drawable.generic_cover_six,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_six)));
-                music.add(new Music(R.drawable.generic_cover_six,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_six)));
-                music.add(new Music(R.drawable.generic_cover_six,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_six)));
-                music.add(new Music(R.drawable.generic_cover_six,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_six)));
-                music.add(new Music(R.drawable.generic_cover_six,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_six)));
+                albumSix();
                 break;
             case 7:
-                music.add(new Music(R.drawable.generic_cover_seven,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_seven)));
-                music.add(new Music(R.drawable.generic_cover_seven,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_seven)));
-                music.add(new Music(R.drawable.generic_cover_seven,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_seven)));
-                music.add(new Music(R.drawable.generic_cover_seven,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_seven)));
-                music.add(new Music(R.drawable.generic_cover_seven,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_seven)));
-                music.add(new Music(R.drawable.generic_cover_seven,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_seven)));
-                music.add(new Music(R.drawable.generic_cover_seven,
-                        getResources().getString(R.string.generic_song),
-                        getResources().getString(R.string.generic_seven)));
+                albumSeven();
+                break;
+            case 8:
+                albumZero();
+                albumOne();
+                albumTwo();
+                albumThree();
+                albumFour();
+                albumFive();
+                albumSix();
+                albumSeven();
                 break;
         }
 
@@ -260,5 +88,88 @@ public class SongActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void albumZero() {
+        music.add(new Music(R.drawable.a_new_beginning,
+                getResources().getString(R.string.new_beginning),
+                getResources().getString(R.string.bensound_sample_hits)));
+        music.add(new Music(R.drawable.creative_mind,
+                getResources().getString(R.string.creative_minds),
+                getResources().getString(R.string.bensound_sample_hits)));
+        music.add(new Music(R.drawable.cute,
+                getResources().getString(R.string.cute),
+                getResources().getString(R.string.bensound_sample_hits)));
+        music.add(new Music(R.drawable.happy_rock,
+                getResources().getString(R.string.happy_rock),
+                getResources().getString(R.string.bensound_sample_hits)));
+        music.add(new Music(R.drawable.jazzy_frenchy,
+                getResources().getString(R.string.jazzy_frenchy),
+                getResources().getString(R.string.bensound_sample_hits)));
+        music.add(new Music(R.drawable.little_idea,
+                getResources().getString(R.string.little_idea),
+                getResources().getString(R.string.bensound_sample_hits)));
+        music.add(new Music(R.drawable.summer,
+                getResources().getString(R.string.summer),
+                getResources().getString(R.string.bensound_sample_hits)));
+        music.add(new Music(R.drawable.ukulele,
+                getResources().getString(R.string.ukulele),
+                getResources().getString(R.string.bensound_sample_hits)));
+    }
+
+    private void albumOne() {
+        for (int i = 0; i < ALBUM_LENGTH; i++) {
+            music.add(new Music(R.drawable.generic_cover,
+                    getResources().getString(R.string.generic_song),
+                    getResources().getString(R.string.generic_one)));
+        }
+    }
+
+    private void albumTwo() {
+        for (int i = 0; i < ALBUM_LENGTH; i++) {
+            music.add(new Music(R.drawable.generic_cover_two,
+                    getResources().getString(R.string.generic_song),
+                    getResources().getString(R.string.generic_two)));
+        }
+    }
+
+    private void albumThree() {
+        for (int i = 0; i < ALBUM_LENGTH; i++) {
+            music.add(new Music(R.drawable.generic_cover_3,
+                    getResources().getString(R.string.generic_song),
+                    getResources().getString(R.string.generic_three)));
+        }
+    }
+
+    private void albumFour() {
+        for (int i = 0; i < ALBUM_LENGTH; i++) {
+            music.add(new Music(R.drawable.generic_cover_four,
+                    getResources().getString(R.string.generic_song),
+                    getResources().getString(R.string.generic_four)));
+        }
+    }
+
+    private void albumFive() {
+        for (int i = 0; i < ALBUM_LENGTH; i++) {
+            music.add(new Music(R.drawable.generic_cover_five,
+                    getResources().getString(R.string.generic_song),
+                    getResources().getString(R.string.generic_five)));
+        }
+    }
+
+    private void albumSix() {
+        for (int i = 0; i < ALBUM_LENGTH; i++) {
+            music.add(new Music(R.drawable.generic_cover_six,
+                    getResources().getString(R.string.generic_song),
+                    getResources().getString(R.string.generic_six)));
+        }
+    }
+
+    private void albumSeven() {
+        for (int i = 0; i < ALBUM_LENGTH; i++) {
+            music.add(new Music(R.drawable.generic_cover_seven,
+                    getResources().getString(R.string.generic_song),
+                    getResources().getString(R.string.generic_seven)));
+        }
     }
 }

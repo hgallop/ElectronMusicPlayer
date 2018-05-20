@@ -7,7 +7,7 @@
     <dimen name="small_text">16sp</dimen>
     <dimen name="album_width">300dp</dimen>
     <dimen name="album_height">225dp</dimen>
-    <dimen name="extra_sm_text">12sp</dimen>
+    <dimen name="extra_sm_text">10sp</dimen>
     <dimen name="tiny">4dp</dimen>
     <dimen name="icon">48dp</dimen>
     <dimen name="none">0dp</dimen>
