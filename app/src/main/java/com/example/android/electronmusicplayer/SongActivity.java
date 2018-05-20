@@ -17,6 +17,8 @@ public class SongActivity extends AppCompatActivity {
     private final String SONG = "song";
     private final String ALBUM = "album";
 
+    final ArrayList<Music> music = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,8 +26,6 @@ public class SongActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         int position = intent.getIntExtra(POS, 0);
-
-        final ArrayList<Music> music = new ArrayList<>();
 
         switch(position) {
             case 0:
