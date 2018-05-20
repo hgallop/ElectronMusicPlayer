@@ -4,6 +4,7 @@
     <dimen name="large_text">24sp</dimen>
     <dimen name="medium_text">20sp</dimen>
     <dimen name="between">8dp</dimen>
+    <dimen name="tiny_spacing">4dp</dimen>
     <dimen name="small_text">16sp</dimen>
     <dimen name="album_width">300dp</dimen>
     <dimen name="album_height">225dp</dimen>

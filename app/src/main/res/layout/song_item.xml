@@ -35,6 +35,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/spacing"
+            android:fontFamily="@font/skranji_regular"
             android:textColor="@color/textColor"
             android:textSize="@dimen/small_text"
             tools:text="@string/ukulele" />
@@ -48,6 +49,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/between"
+            android:fontFamily="@font/skranji_regular"
             android:textColor="@color/textColor"
             android:textSize="@dimen/extra_sm_text"
             tools:text="@string/bensound_sample_hits" />

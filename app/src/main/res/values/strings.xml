@@ -3,6 +3,16 @@
     <string name="music">Albums</string>
     <string name="songs">Songs</string>
     <string name="now_playing">Now Playing</string>
+    <string name="description">album cover</string>
+    <string name="home">Home</string>
+    <string name="albums">Albums</string>
+    <string name="play">Play button</string>
+    <string name="rewind_button">Rewind button</string>
+    <string name="skip_track_backwards">Skip track backwards</string>
+    <string name="pause_button">Pause button</string>
+    <string name="stop">Stop button</string>
+    <string name="fast_forward_button">Fast forward button</string>
+    <string name="skip_track_forward">Skip track forward button</string>
 
     <!--Music Info-->
     <string name="bensound_sample_hits">Bensound: Sample Hits</string>
@@ -26,7 +36,4 @@
     <string name="jazzy_frenchy">Jazzy Frenchy</string>
     <string name="little_idea">Little Idea</string>
     <string name="generic_song">Generic Song</string>
-    <string name="description">album cover</string>
-    <string name="home">Home</string>
-    <string name="albums">Albums</string>
 </resources>

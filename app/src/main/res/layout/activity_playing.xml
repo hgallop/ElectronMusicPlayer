@@ -56,6 +56,7 @@
 
             <ImageButton
                 android:id="@+id/skipback"
+                android:contentDescription="@string/skip_track_backwards"
                 android:layout_width="@dimen/icon"
                 android:layout_height="@dimen/icon"
                 android:background="@drawable/border"
@@ -63,6 +64,7 @@
 
             <ImageButton
                 android:id="@+id/rewind"
+                android:contentDescription="@string/rewind_button"
                 android:layout_width="@dimen/icon"
                 android:layout_height="@dimen/icon"
                 android:background="@drawable/border"
@@ -70,6 +72,7 @@
 
             <ImageButton
                 android:id="@+id/play"
+                android:contentDescription="@string/play"
                 android:layout_width="@dimen/icon"
                 android:layout_height="@dimen/icon"
                 android:background="@drawable/border"
@@ -77,6 +80,7 @@
 
             <ImageButton
                 android:id="@+id/pause"
+                android:contentDescription="@string/pause_button"
                 android:layout_width="@dimen/icon"
                 android:layout_height="@dimen/icon"
                 android:background="@drawable/border"
@@ -84,6 +88,7 @@
 
             <ImageButton
                 android:id="@+id/stop"
+                android:contentDescription="@string/stop"
                 android:layout_width="@dimen/icon"
                 android:layout_height="@dimen/icon"
                 android:background="@drawable/border"
@@ -91,6 +96,7 @@
 
             <ImageButton
                 android:id="@+id/fastforward"
+                android:contentDescription="@string/fast_forward_button"
                 android:layout_width="@dimen/icon"
                 android:layout_height="@dimen/icon"
                 android:background="@drawable/border"
@@ -98,6 +104,7 @@
 
             <ImageButton
                 android:id="@+id/skipforward"
+                android:contentDescription="@string/skip_track_forward"
                 android:layout_width="@dimen/icon"
                 android:layout_height="@dimen/icon"
                 android:background="@drawable/border"
@@ -113,21 +120,21 @@
 
             <Button
                 android:id="@+id/songs"
-                style="@style/PsuedoButton"
+                style="@style/Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/songs" />
 
             <Button
                 android:id="@+id/albums"
-                style="@style/PsuedoButton"
+                style="@style/Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/albums" />
 
             <Button
                 android:id="@+id/home"
-                style="@style/PsuedoButton"
+                style="@style/Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/home" />
