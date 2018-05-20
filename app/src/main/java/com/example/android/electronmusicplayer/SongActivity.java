@@ -64,6 +64,9 @@ public class SongActivity extends AppCompatActivity {
                 albumFive();
                 albumSix();
                 albumSeven();
+                for(int i = 0; i < music.size(); i++) {
+                    music.get(i).setIdentity(8);
+                }
                 break;
         }
 
