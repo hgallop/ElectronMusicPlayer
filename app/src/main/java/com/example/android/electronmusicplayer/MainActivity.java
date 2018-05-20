@@ -8,6 +8,10 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final String IMAGE = "imageId";
+    private final String SONG = "song";
+    private final String ALBUM = "album";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +40,15 @@ public class MainActivity extends AppCompatActivity {
         playing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                int imageId = R.drawable.a_new_beginning;
+                String song = getResources().getString(R.string.new_beginning);
+                String album = getResources().getString(R.string.bensound_sample_hits);
+
                 Intent intent = new Intent(MainActivity.this, NowPlayingActivity.class);
+                intent.putExtra(IMAGE, imageId);
+                intent.putExtra(SONG, song);
+                intent.putExtra(ALBUM, album);
                 startActivity(intent);
 
             }

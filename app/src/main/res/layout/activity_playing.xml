@@ -7,10 +7,18 @@
     android:background="@drawable/gradient_background"
     tools:context=".NowPlayingActivity">
 
+    <TextView
+        android:id="@+id/actionBar"
+        style="@style/PsuedoActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/now_playing" />
+
     <ImageView
         android:id="@+id/albumImage"
         android:layout_width="match_parent"
         android:layout_height="@dimen/album_height"
+        app:layout_constraintTop_toBottomOf="@id/actionBar"
         android:src="@drawable/ukulele"/>
 
     <TextView
@@ -32,5 +40,64 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/song" />
+
+    <LinearLayout
+        android:id="@+id/buttonBar"
+        app:layout_constraintTop_toBottomOf="@+id/album"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/spacing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/skipback"
+            android:layout_width="@dimen/icon"
+            android:layout_height="@dimen/icon"
+            android:background="@drawable/border"
+            android:src="@drawable/ic_skip_previous_black_48dp"/>
+
+        <ImageButton
+            android:id="@+id/rewind"
+            android:layout_width="@dimen/icon"
+            android:layout_height="@dimen/icon"
+            android:background="@drawable/border"
+            android:src="@drawable/ic_fast_rewind_black_48dp"/>
+
+        <ImageButton
+            android:id="@+id/play"
+            android:layout_width="@dimen/icon"
+            android:layout_height="@dimen/icon"
+            android:background="@drawable/border"
+            android:src="@drawable/ic_play_circle_filled_black_48dp"/>
+
+        <ImageButton
+            android:id="@+id/pause"
+            android:layout_width="@dimen/icon"
+            android:layout_height="@dimen/icon"
+            android:background="@drawable/border"
+            android:src="@drawable/ic_pause_circle_outline_black_48dp"/>
+
+        <ImageButton
+            android:id="@+id/stop"
+            android:layout_width="@dimen/icon"
+            android:layout_height="@dimen/icon"
+            android:background="@drawable/border"
+            android:src="@drawable/ic_stop_black_48dp"/>
+
+        <ImageButton
+            android:id="@+id/fastforward"
+            android:layout_width="@dimen/icon"
+            android:layout_height="@dimen/icon"
+            android:background="@drawable/border"
+            android:src="@drawable/ic_fast_forward_black_48dp"/>
+
+        <ImageButton
+            android:id="@+id/skipforward"
+            android:layout_width="@dimen/icon"
+            android:layout_height="@dimen/icon"
+            android:background="@drawable/border"
+            android:src="@drawable/ic_skip_next_black_48dp"/>
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
