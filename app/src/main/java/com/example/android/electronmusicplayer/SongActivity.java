@@ -16,6 +16,7 @@ public class SongActivity extends AppCompatActivity {
     private final String IMAGE = "imageId";
     private final String SONG = "song";
     private final String ALBUM = "album";
+    private final String ID = "id";
 
     private static final int ALBUM_LENGTH = 8;
 
@@ -79,12 +80,14 @@ public class SongActivity extends AppCompatActivity {
                 int imageId = music.get(position).getImageId();
                 String songTitle = music.get(position).getMusicTitle();
                 String albumTitle = music.get(position).getMusicDescription();
+                int identity = music.get(position).getIdentity();
 
                 Intent intent = new Intent(SongActivity.this, NowPlayingActivity.class);
                 intent.putExtra(POS, position);
                 intent.putExtra(IMAGE, imageId);
                 intent.putExtra(SONG, songTitle);
                 intent.putExtra(ALBUM, albumTitle);
+                intent.putExtra(ID, identity);
                 startActivity(intent);
             }
         });
@@ -93,35 +96,35 @@ public class SongActivity extends AppCompatActivity {
     private void albumZero() {
         music.add(new Music(R.drawable.a_new_beginning,
                 getResources().getString(R.string.new_beginning),
-                getResources().getString(R.string.bensound_sample_hits)));
+                getResources().getString(R.string.bensound_sample_hits), 0));
         music.add(new Music(R.drawable.creative_mind,
                 getResources().getString(R.string.creative_minds),
-                getResources().getString(R.string.bensound_sample_hits)));
+                getResources().getString(R.string.bensound_sample_hits), 0));
         music.add(new Music(R.drawable.cute,
                 getResources().getString(R.string.cute),
-                getResources().getString(R.string.bensound_sample_hits)));
+                getResources().getString(R.string.bensound_sample_hits), 0));
         music.add(new Music(R.drawable.happy_rock,
                 getResources().getString(R.string.happy_rock),
-                getResources().getString(R.string.bensound_sample_hits)));
+                getResources().getString(R.string.bensound_sample_hits), 0));
         music.add(new Music(R.drawable.jazzy_frenchy,
                 getResources().getString(R.string.jazzy_frenchy),
-                getResources().getString(R.string.bensound_sample_hits)));
+                getResources().getString(R.string.bensound_sample_hits), 0));
         music.add(new Music(R.drawable.little_idea,
                 getResources().getString(R.string.little_idea),
-                getResources().getString(R.string.bensound_sample_hits)));
+                getResources().getString(R.string.bensound_sample_hits), 0));
         music.add(new Music(R.drawable.summer,
                 getResources().getString(R.string.summer),
-                getResources().getString(R.string.bensound_sample_hits)));
+                getResources().getString(R.string.bensound_sample_hits), 0));
         music.add(new Music(R.drawable.ukulele,
                 getResources().getString(R.string.ukulele),
-                getResources().getString(R.string.bensound_sample_hits)));
+                getResources().getString(R.string.bensound_sample_hits), 0));
     }
 
     private void albumOne() {
         for (int i = 0; i < ALBUM_LENGTH; i++) {
             music.add(new Music(R.drawable.generic_cover,
                     getResources().getString(R.string.generic_song),
-                    getResources().getString(R.string.generic_one)));
+                    getResources().getString(R.string.generic_one), 1));
         }
     }
 
@@ -129,7 +132,7 @@ public class SongActivity extends AppCompatActivity {
         for (int i = 0; i < ALBUM_LENGTH; i++) {
             music.add(new Music(R.drawable.generic_cover_two,
                     getResources().getString(R.string.generic_song),
-                    getResources().getString(R.string.generic_two)));
+                    getResources().getString(R.string.generic_two), 2));
         }
     }
 
@@ -137,7 +140,7 @@ public class SongActivity extends AppCompatActivity {
         for (int i = 0; i < ALBUM_LENGTH; i++) {
             music.add(new Music(R.drawable.generic_cover_3,
                     getResources().getString(R.string.generic_song),
-                    getResources().getString(R.string.generic_three)));
+                    getResources().getString(R.string.generic_three), 3));
         }
     }
 
@@ -145,7 +148,7 @@ public class SongActivity extends AppCompatActivity {
         for (int i = 0; i < ALBUM_LENGTH; i++) {
             music.add(new Music(R.drawable.generic_cover_four,
                     getResources().getString(R.string.generic_song),
-                    getResources().getString(R.string.generic_four)));
+                    getResources().getString(R.string.generic_four), 4));
         }
     }
 
@@ -153,7 +156,7 @@ public class SongActivity extends AppCompatActivity {
         for (int i = 0; i < ALBUM_LENGTH; i++) {
             music.add(new Music(R.drawable.generic_cover_five,
                     getResources().getString(R.string.generic_song),
-                    getResources().getString(R.string.generic_five)));
+                    getResources().getString(R.string.generic_five), 5));
         }
     }
 
@@ -161,7 +164,7 @@ public class SongActivity extends AppCompatActivity {
         for (int i = 0; i < ALBUM_LENGTH; i++) {
             music.add(new Music(R.drawable.generic_cover_six,
                     getResources().getString(R.string.generic_song),
-                    getResources().getString(R.string.generic_six)));
+                    getResources().getString(R.string.generic_six), 6));
         }
     }
 
@@ -169,7 +172,7 @@ public class SongActivity extends AppCompatActivity {
         for (int i = 0; i < ALBUM_LENGTH; i++) {
             music.add(new Music(R.drawable.generic_cover_seven,
                     getResources().getString(R.string.generic_song),
-                    getResources().getString(R.string.generic_seven)));
+                    getResources().getString(R.string.generic_seven), 7));
         }
     }
 }
