@@ -13,6 +13,9 @@ import java.util.ArrayList;
 public class SongActivity extends AppCompatActivity {
 
     private final String POS = "pos";
+    private final String IMAGE = "imageId";
+    private final String SONG = "song";
+    private final String ALBUM = "album";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +25,7 @@ public class SongActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int position = intent.getIntExtra(POS, 0);
 
-        ArrayList<Music> music = new ArrayList<>();
+        final ArrayList<Music> music = new ArrayList<>();
 
         switch(position) {
             case 0:
@@ -245,8 +248,15 @@ public class SongActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                int imageId = music.get(position).getImageId();
+                String songTitle = music.get(position).getMusicTitle();
+                String albumTitle = music.get(position).getMusicDescription();
+
                 Intent intent = new Intent(SongActivity.this, NowPlayingActivity.class);
                 intent.putExtra(POS, position);
+                intent.putExtra(IMAGE, imageId);
+                intent.putExtra(SONG, songTitle);
+                intent.putExtra(ALBUM, albumTitle);
                 startActivity(intent);
             }
         });

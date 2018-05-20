@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    tools:context=".NowPlayingActivity">
+
+    <ImageView
+        android:id="@+id/albumImage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_height"
+        android:src="@drawable/ukulele"/>
+
+    <TextView
+        android:id="@+id/song"
+        style="@style/AlbumInfo.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="@string/ukulele"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/albumImage" />
+
+    <TextView
+        android:id="@+id/album"
+        style="@style/AlbumInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="@string/bensound_sample_hits"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/song" />
+
+</android.support.constraint.ConstraintLayout>
