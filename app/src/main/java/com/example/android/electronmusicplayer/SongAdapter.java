@@ -29,13 +29,13 @@ public class SongAdapter extends ArrayAdapter<Music> {
 
         Music currentMusic = getItem(position);
 
-        ImageView songArt = songListItem.findViewById(R.id.songArt);
+        ImageView songArt = songListItem.findViewById(R.id.song_image);
         songArt.setImageResource(currentMusic.getImageId());
 
-        TextView songTitle = songListItem.findViewById(R.id.songTitle);
+        TextView songTitle = songListItem.findViewById(R.id.song_title);
         songTitle.setText(currentMusic.getMusicTitle());
 
-        TextView songAlbum = songListItem.findViewById(R.id.songAlbum);
+        TextView songAlbum = songListItem.findViewById(R.id.song_album);
         songAlbum.setText(currentMusic.getMusicDescription());
 
         return songListItem;

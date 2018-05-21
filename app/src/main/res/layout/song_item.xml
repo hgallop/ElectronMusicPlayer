@@ -9,7 +9,7 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/songArt"
+        android:id="@+id/song_image"
         style="@style/SongArt"
         android:contentDescription="@string/description"
         android:layout_width="@dimen/song_width"
@@ -27,7 +27,7 @@
         android:paddingEnd="@dimen/none">
 
         <TextView
-            android:id="@+id/songTitle"
+            android:id="@+id/song_title"
             style="@style/SongTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,18 +37,18 @@
             tools:text="@string/ukulele" />
 
         <TextView
-            android:id="@+id/songAlbum"
+            android:id="@+id/song_album"
             style="@style/SongAlbum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/songTitle"
+            android:layout_below="@id/song_title"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_centerHorizontal="true"
             tools:text="@string/bensound_sample_hits" />
 
         <ImageView
-            android:id="@+id/play"
+            android:id="@+id/play_icon"
             android:layout_width="@dimen/icon"
             android:layout_height="@dimen/icon"
             android:layout_alignParentRight="true"

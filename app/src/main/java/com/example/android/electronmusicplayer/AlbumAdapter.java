@@ -29,13 +29,13 @@ public class AlbumAdapter extends ArrayAdapter<Music> {
 
         Music currentMusic = getItem(position);
 
-        ImageView albumCover = musicListItem.findViewById(R.id.albumArt);
+        ImageView albumCover = musicListItem.findViewById(R.id.album_image);
         albumCover.setImageResource(currentMusic.getImageId());
 
-        TextView albumTitle = musicListItem.findViewById(R.id.albumTitle);
+        TextView albumTitle = musicListItem.findViewById(R.id.album_title);
         albumTitle.setText(currentMusic.getMusicTitle());
 
-        TextView albumDescription = musicListItem.findViewById(R.id.albumInformation);
+        TextView albumDescription = musicListItem.findViewById(R.id.album_description);
         albumDescription.setText(currentMusic.getMusicDescription());
 
         return musicListItem;

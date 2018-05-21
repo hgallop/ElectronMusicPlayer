@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView albums = findViewById(R.id.albums);
         TextView songs = findViewById(R.id.songs);
-        TextView playing = findViewById(R.id.playing);
+        TextView playing = findViewById(R.id.now_playing);
 
         albums.setOnClickListener(new View.OnClickListener() {
             @Override
