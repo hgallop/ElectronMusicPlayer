@@ -2,9 +2,9 @@ package com.example.android.electronmusicplayer;
 
 public class Music {
 
-    private int mImageId;
-    private String mMusicTitle;
-    private String mMusicDescription;
+    private final int mImageId;
+    private final String mMusicTitle;
+    private final String mMusicDescription;
     private int mIdentity;
 
     Music(int image, String title, String desc, int identity){

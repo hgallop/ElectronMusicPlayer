@@ -8,21 +8,21 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final String ID ="id";
-    private final String IMAGE = "imageId";
-    private final String SONG = "song";
-    private final String ALBUM = "album";
+    private final static String ID ="id";
+    private final static String IMAGE = "imageId";
+    private final static String SONG = "song";
+    private final static String ALBUM = "album";
 
-    int identity = 8;
+    private final static int identity = 8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView albums = findViewById(R.id.albums);
-        TextView songs = findViewById(R.id.songs);
-        TextView playing = findViewById(R.id.now_playing);
+        final TextView albums = findViewById(R.id.albums);
+        final TextView songs = findViewById(R.id.songs);
+        final TextView nowPlaying = findViewById(R.id.now_playing);
 
         albums.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        playing.setOnClickListener(new View.OnClickListener() {
+        nowPlaying.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

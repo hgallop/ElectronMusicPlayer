@@ -30,6 +30,7 @@ public class SongAdapter extends ArrayAdapter<Music> {
         Music currentMusic = getItem(position);
 
         ImageView songArt = songListItem.findViewById(R.id.song_image);
+        assert currentMusic != null;
         songArt.setImageResource(currentMusic.getImageId());
 
         TextView songTitle = songListItem.findViewById(R.id.song_title);

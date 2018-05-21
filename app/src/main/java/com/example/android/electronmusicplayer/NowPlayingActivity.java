@@ -89,22 +89,22 @@ public class NowPlayingActivity extends AppCompatActivity {
         final ImageView songImage = findViewById(R.id.song_image);
         final TextView songName = findViewById(R.id.song_title);
         final TextView albumName = findViewById(R.id.album_title);
-        ImageButton skipBack = findViewById(R.id.skip_back);
-        ImageButton rewind = findViewById(R.id.rewind);
+        final ImageButton skipBack = findViewById(R.id.skip_back);
+        final ImageButton rewind = findViewById(R.id.rewind);
         final ImageButton play = findViewById(R.id.play_icon);
         final ImageButton pause = findViewById(R.id.pause);
-        ImageButton stop = findViewById(R.id.stop);
-        ImageButton fastForward = findViewById(R.id.fast_forward);
-        ImageButton skipForward = findViewById(R.id.skip_forward);
-        Button home = findViewById(R.id.home);
-        Button songs = findViewById(R.id.songs);
-        Button albums = findViewById(R.id.albums);
+        final ImageButton stop = findViewById(R.id.stop);
+        final ImageButton fastForward = findViewById(R.id.fast_forward);
+        final ImageButton skipForward = findViewById(R.id.skip_forward);
+        final Button home = findViewById(R.id.home);
+        final Button songs = findViewById(R.id.songs);
+        final Button albums = findViewById(R.id.albums);
 
         songImage.setImageResource(imageID);
         songName.setText(song);
         albumName.setText(album);
 
-        playing = true;
+        playing = identity != 8;
         paused = false;
 
         skipBack.setOnClickListener(new View.OnClickListener() {
