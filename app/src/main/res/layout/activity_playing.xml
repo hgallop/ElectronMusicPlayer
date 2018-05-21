@@ -12,20 +12,13 @@
         android:layout_height="wrap_content"
         android:background="@drawable/gradient_background">
 
-        <TextView
-            android:id="@+id/actionBar"
-            style="@style/PsuedoActionBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/now_playing" />
-
         <ImageView
             android:id="@+id/albumImage"
             android:contentDescription="@string/description"
             android:layout_width="match_parent"
             android:layout_height="@dimen/album_height"
             android:src="@drawable/ukulele"
-            app:layout_constraintTop_toBottomOf="@id/actionBar" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/song"

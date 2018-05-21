@@ -16,9 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AlbumActivity" />
-        <activity android:name=".SongActivity" />
-        <activity android:name=".NowPlayingActivity"></activity>
+        <activity android:parentActivityName=".MainActivity" android:name=".AlbumActivity" android:launchMode="singleTask" android:label="@string/albums" />
+        <activity android:parentActivityName=".MainActivity" android:name=".SongActivity" android:launchMode="singleTask" android:label="@string/songs"/>
+        <activity android:parentActivityName=".MainActivity" android:name=".NowPlayingActivity" android:launchMode="singleTask" android:label="@string/now_playing"/>
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.example.android.electronmusicplayer.MainActivity" />
     </application>
 
 </manifest>
