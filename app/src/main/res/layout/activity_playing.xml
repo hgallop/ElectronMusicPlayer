@@ -73,14 +73,6 @@
                 android:src="@drawable/ic_play_circle_filled_black_48dp" />
 
             <ImageButton
-                android:id="@+id/pause"
-                android:layout_width="@dimen/icon"
-                android:layout_height="@dimen/icon"
-                android:background="@drawable/border"
-                android:contentDescription="@string/pause_button"
-                android:src="@drawable/ic_pause_circle_outline_black_48dp" />
-
-            <ImageButton
                 android:id="@+id/stop"
                 android:layout_width="@dimen/icon"
                 android:layout_height="@dimen/icon"

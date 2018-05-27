@@ -18,6 +18,9 @@ public class AlbumActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.music_list);
 
+        // Add a return to previous screen in top left corner
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         final ArrayList<Music> albums = new ArrayList<>();
 
         albums.add(new Music(R.drawable.bensound_album_cover,
@@ -63,5 +66,12 @@ public class AlbumActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    // Return to previous activity
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }

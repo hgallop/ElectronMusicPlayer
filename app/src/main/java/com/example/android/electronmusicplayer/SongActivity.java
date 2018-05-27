@@ -29,6 +29,9 @@ public class SongActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int identity = intent.getIntExtra(IDENTITY, 0);
 
+        // Add a return to previous screen in top left corner
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         switch (identity) {
             case 0:
                 albumZero();
@@ -93,6 +96,13 @@ public class SongActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    // Return to previous activity
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 
     private void albumZero() {

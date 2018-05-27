@@ -24,7 +24,6 @@ public class NowPlayingActivity extends AppCompatActivity {
     boolean isPlaying;
     boolean isPaused;
     int playButtonImage;
-    int pauseButtonImage;
 
     int position;
     int imageID;
@@ -42,13 +41,16 @@ public class NowPlayingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_playing);
 
         Intent intent = getIntent();
-//        position = intent.getIntExtra(POSITION, 0);
-//        imageID = intent.getIntExtra(IMAGE_ID, 0);
-//        song = intent.getStringExtra(SONG);
-//        album = intent.getStringExtra(ALBUM);
+        position = intent.getIntExtra(POSITION, 0);
+        imageID = intent.getIntExtra(IMAGE_ID, 0);
+        song = intent.getStringExtra(SONG);
+        album = intent.getStringExtra(ALBUM);
         identity = intent.getIntExtra(IDENTITY, 0);
 
-        switch (identity){
+        // Add a return to previous screen in top left corner
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        switch (identity) {
             case 0:
                 albumZero();
                 break;
@@ -92,7 +94,6 @@ public class NowPlayingActivity extends AppCompatActivity {
         final ImageButton skipBack = findViewById(R.id.skip_back);
         final ImageButton rewind = findViewById(R.id.rewind);
         final ImageButton play = findViewById(R.id.play_icon);
-        final ImageButton pause = findViewById(R.id.pause);
         final ImageButton stop = findViewById(R.id.stop);
         final ImageButton fastForward = findViewById(R.id.fast_forward);
         final ImageButton skipForward = findViewById(R.id.skip_forward);
@@ -100,17 +101,21 @@ public class NowPlayingActivity extends AppCompatActivity {
         final Button allSongs = findViewById(R.id.songs);
         final Button allAlbums = findViewById(R.id.albums);
 
+
+        isPlaying = identity != 8;
+        isPaused = !isPlaying;
+        setButton();
+
+        play.setImageResource(playButtonImage);
+
         songImage.setImageResource(imageID);
         songName.setText(song);
         albumName.setText(album);
 
-        isPlaying = identity != 8;
-        isPaused = false;
-
         skipBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(position > 0) {
+                if (position > 0) {
                     position -= 1;
                 } else {
                     position = NowPlayingActivity.this.songs.size() - 1;
@@ -137,24 +142,16 @@ public class NowPlayingActivity extends AppCompatActivity {
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isPlaying = true;
-                isPaused = false;
-                setButton();
-                play.setImageResource(playButtonImage);
-                pause.setImageResource(pauseButtonImage);
-                Toast.makeText(NowPlayingActivity.this, "Play", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        pause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                if (isPlaying) {
                     isPaused = true;
                     isPlaying = false;
-                    setButton();
-                    play.setImageResource(playButtonImage);
-                    pause.setImageResource(pauseButtonImage);
-                    Toast.makeText(NowPlayingActivity.this, "Pause", Toast.LENGTH_SHORT).show();
+                } else {
+                    isPlaying = true;
+                    isPaused = false;
+                }
+                setButton();
+                play.setImageResource(playButtonImage);
+                Toast.makeText(NowPlayingActivity.this, "Play", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -165,7 +162,6 @@ public class NowPlayingActivity extends AppCompatActivity {
                 isPaused = false;
                 setButton();
                 play.setImageResource(playButtonImage);
-                pause.setImageResource(pauseButtonImage);
                 Toast.makeText(NowPlayingActivity.this, "Stop", Toast.LENGTH_SHORT).show();
             }
         });
@@ -180,7 +176,7 @@ public class NowPlayingActivity extends AppCompatActivity {
         skipForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(position < NowPlayingActivity.this.songs.size() - 1) {
+                if (position < NowPlayingActivity.this.songs.size() - 1) {
                     position += 1;
                 } else {
                     position = 0;
@@ -226,15 +222,19 @@ public class NowPlayingActivity extends AppCompatActivity {
         });
     }
 
+    // Return to previous activity
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
+
     private void setButton() {
         if (isPlaying) {
             playButtonImage = R.drawable.ic_play_circle_filled_black_48dp;
-            pauseButtonImage = R.drawable.ic_pause_circle_outline_black_48dp;
         } else if(isPaused) {
-            playButtonImage = R.drawable.ic_play_circle_outline_black_48dp;
-            pauseButtonImage = R.drawable.ic_pause_circle_filled_black_48dp;
+            playButtonImage = R.drawable.ic_pause_circle_filled_black_48dp;
         }  else {
-            pauseButtonImage = R.drawable.ic_pause_circle_outline_black_48dp;
             playButtonImage = R.drawable.ic_play_circle_outline_black_48dp;
         }
     }

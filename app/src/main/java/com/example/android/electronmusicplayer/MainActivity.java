@@ -52,14 +52,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //information for first song
-//                int imageId = R.drawable.a_new_beginning;
-//                String song = getResources().getString(R.string.new_beginning);
-//                String album = getResources().getString(R.string.bensound_sample_hits);
+                int imageId = R.drawable.a_new_beginning;
+                String song = getResources().getString(R.string.new_beginning);
+                String album = getResources().getString(R.string.bensound_sample_hits);
 
                 Intent intent = new Intent(MainActivity.this, NowPlayingActivity.class);
-//                intent.putExtra(IMAGE_ID, imageId);
-//                intent.putExtra(SONG, song);
-//                intent.putExtra(ALBUM, album);
+                intent.putExtra(IMAGE_ID, imageId);
+                intent.putExtra(SONG, song);
+                intent.putExtra(ALBUM, album);
                 intent.putExtra(IDENTITY, identity);
                 startActivity(intent);
 
