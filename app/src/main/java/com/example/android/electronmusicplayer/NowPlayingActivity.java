@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class NowPlayingActivity extends AppCompatActivity {
 
     private static final String POSITION = "position";
-    private static final String IMAGE_ID = "image_Id";
+    private static final String IMAGE_ID = "imageId";
     private static final String SONG = "song";
     private static final String ALBUM = "album";
     private static final String IDENTITY = "identity";
@@ -42,10 +42,10 @@ public class NowPlayingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_playing);
 
         Intent intent = getIntent();
-        position = intent.getIntExtra(POSITION, 0);
-        imageID = intent.getIntExtra(IMAGE_ID, 0);
-        song = intent.getStringExtra(SONG);
-        album = intent.getStringExtra(ALBUM);
+//        position = intent.getIntExtra(POSITION, 0);
+//        imageID = intent.getIntExtra(IMAGE_ID, 0);
+//        song = intent.getStringExtra(SONG);
+//        album = intent.getStringExtra(ALBUM);
         identity = intent.getIntExtra(IDENTITY, 0);
 
         switch (identity){
@@ -201,6 +201,7 @@ public class NowPlayingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(NowPlayingActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
@@ -209,6 +210,7 @@ public class NowPlayingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(NowPlayingActivity.this, SongActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra(IDENTITY, identity);
                 startActivity(intent);
             }
@@ -218,6 +220,7 @@ public class NowPlayingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(NowPlayingActivity.this, AlbumActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
