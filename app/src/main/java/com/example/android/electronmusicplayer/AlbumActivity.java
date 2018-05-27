@@ -11,43 +11,43 @@ import java.util.ArrayList;
 
 public class AlbumActivity extends AppCompatActivity {
 
-    private static final String ID = "id";
+    private static final String IDENTITY = "identity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.music_list);
 
-        final ArrayList<Music> music = new ArrayList<>();
+        final ArrayList<Music> albums = new ArrayList<>();
 
-        music.add(new Music(R.drawable.bensound_album_cover,
+        albums.add(new Music(R.drawable.bensound_album_cover,
                 getResources().getString(R.string.bensound_sample_hits),
                 getResources().getString(R.string.sample_description), 0));
-        music.add(new Music(R.drawable.generic_cover,
+        albums.add(new Music(R.drawable.generic_cover,
                 getResources().getString(R.string.generic_one),
                 getResources().getString(R.string.generic_desc), 1));
-        music.add(new Music(R.drawable.generic_cover_two,
+        albums.add(new Music(R.drawable.generic_cover_two,
                 getResources().getString(R.string.generic_two),
                 getResources().getString(R.string.generic_desc), 2));
-        music.add(new Music(R.drawable.generic_cover_3,
+        albums.add(new Music(R.drawable.generic_cover_3,
                 getResources().getString(R.string.generic_three),
                 getResources().getString(R.string.generic_desc), 3));
-        music.add(new Music(R.drawable.generic_cover_four,
+        albums.add(new Music(R.drawable.generic_cover_four,
                 getResources().getString(R.string.generic_four),
                 getResources().getString(R.string.generic_desc), 4));
-        music.add(new Music(R.drawable.generic_cover_five,
+        albums.add(new Music(R.drawable.generic_cover_five,
                 getResources().getString(R.string.generic_five),
                 getResources().getString(R.string.generic_desc), 5));
-        music.add(new Music(R.drawable.generic_cover_six,
+        albums.add(new Music(R.drawable.generic_cover_six,
                 getResources().getString(R.string.generic_six),
                 getResources().getString(R.string.generic_desc), 6));
-        music.add(new Music(R.drawable.generic_cover_seven,
+        albums.add(new Music(R.drawable.generic_cover_seven,
                 getResources().getString(R.string.generic_seven),
                 getResources().getString(R.string.generic_desc), 7));
 
         ListView musicList = findViewById(R.id.list);
 
-        AlbumAdapter albumAdapter = new AlbumAdapter(this, music);
+        AlbumAdapter albumAdapter = new AlbumAdapter(this, albums);
 
         musicList.setAdapter(albumAdapter);
 
@@ -55,10 +55,10 @@ public class AlbumActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                int identity = music.get(position).getIdentity();
+                int identity = albums.get(position).getIdentity();
 
                 Intent intent = new Intent(AlbumActivity.this, SongActivity.class);
-                intent.putExtra(ID, identity);
+                intent.putExtra(IDENTITY, identity);
                 startActivity(intent);
             }
         });

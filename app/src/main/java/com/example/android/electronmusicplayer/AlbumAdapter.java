@@ -21,25 +21,25 @@ public class AlbumAdapter extends ArrayAdapter<Music> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View musicListItem = convertView;
+        View albumListItem = convertView;
 
-        if(musicListItem == null){
-            musicListItem = LayoutInflater.from(getContext()).inflate(R.layout.album_item, parent, false);
+        if(albumListItem == null){
+            albumListItem = LayoutInflater.from(getContext()).inflate(R.layout.album_item, parent, false);
         }
 
-        Music currentMusic = getItem(position);
+        Music currentAlbum = getItem(position);
 
-        ImageView albumCover = musicListItem.findViewById(R.id.album_image);
-        assert currentMusic != null;
-        albumCover.setImageResource(currentMusic.getImageId());
+        ImageView albumCover = albumListItem.findViewById(R.id.album_image);
+        assert currentAlbum != null;
+        albumCover.setImageResource(currentAlbum.getImageId());
 
-        TextView albumTitle = musicListItem.findViewById(R.id.album_title);
-        albumTitle.setText(currentMusic.getMusicTitle());
+        TextView albumTitle = albumListItem.findViewById(R.id.album_title);
+        albumTitle.setText(currentAlbum.getMusicTitle());
 
-        TextView albumDescription = musicListItem.findViewById(R.id.album_description);
-        albumDescription.setText(currentMusic.getMusicDescription());
+        TextView albumDescription = albumListItem.findViewById(R.id.album_description);
+        albumDescription.setText(currentAlbum.getMusicDescription());
 
-        return musicListItem;
+        return albumListItem;
 
     }
 }

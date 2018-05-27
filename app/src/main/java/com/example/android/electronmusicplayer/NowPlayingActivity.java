@@ -15,14 +15,14 @@ import java.util.ArrayList;
 
 public class NowPlayingActivity extends AppCompatActivity {
 
-    private static final String POS = "pos";
-    private static final String IMAGE = "imageId";
+    private static final String POSITION = "position";
+    private static final String IMAGE_ID = "image_Id";
     private static final String SONG = "song";
     private static final String ALBUM = "album";
-    private static final String ID = "id";
+    private static final String IDENTITY = "identity";
 
-    boolean playing;
-    boolean paused;
+    boolean isPlaying;
+    boolean isPaused;
     int playButtonImage;
     int pauseButtonImage;
 
@@ -34,7 +34,7 @@ public class NowPlayingActivity extends AppCompatActivity {
 
     private static final int ALBUM_LENGTH = 8;
 
-    final ArrayList<Music> music = new ArrayList<>();
+    final ArrayList<Music> songs = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +42,11 @@ public class NowPlayingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_playing);
 
         Intent intent = getIntent();
-        position = intent.getIntExtra(POS, 0);
-        imageID = intent.getIntExtra(IMAGE, 0);
+        position = intent.getIntExtra(POSITION, 0);
+        imageID = intent.getIntExtra(IMAGE_ID, 0);
         song = intent.getStringExtra(SONG);
         album = intent.getStringExtra(ALBUM);
-        identity = intent.getIntExtra(ID, 0);
+        identity = intent.getIntExtra(IDENTITY, 0);
 
         switch (identity){
             case 0:
@@ -97,15 +97,15 @@ public class NowPlayingActivity extends AppCompatActivity {
         final ImageButton fastForward = findViewById(R.id.fast_forward);
         final ImageButton skipForward = findViewById(R.id.skip_forward);
         final Button home = findViewById(R.id.home);
-        final Button songs = findViewById(R.id.songs);
-        final Button albums = findViewById(R.id.albums);
+        final Button allSongs = findViewById(R.id.songs);
+        final Button allAlbums = findViewById(R.id.albums);
 
         songImage.setImageResource(imageID);
         songName.setText(song);
         albumName.setText(album);
 
-        playing = identity != 8;
-        paused = false;
+        isPlaying = identity != 8;
+        isPaused = false;
 
         skipBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,12 +113,12 @@ public class NowPlayingActivity extends AppCompatActivity {
                 if(position > 0) {
                     position -= 1;
                 } else {
-                    position = music.size() - 1;
+                    position = NowPlayingActivity.this.songs.size() - 1;
                 }
 
-                imageID = music.get(position).getImageId();
-                song = music.get(position).getMusicTitle();
-                album = music.get(position).getMusicDescription();
+                imageID = NowPlayingActivity.this.songs.get(position).getImageId();
+                song = NowPlayingActivity.this.songs.get(position).getMusicTitle();
+                album = NowPlayingActivity.this.songs.get(position).getMusicDescription();
 
                 songImage.setImageResource(imageID);
                 songName.setText(song);
@@ -137,8 +137,8 @@ public class NowPlayingActivity extends AppCompatActivity {
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playing = true;
-                paused = false;
+                isPlaying = true;
+                isPaused = false;
                 setButton();
                 play.setImageResource(playButtonImage);
                 pause.setImageResource(pauseButtonImage);
@@ -149,8 +149,8 @@ public class NowPlayingActivity extends AppCompatActivity {
         pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    paused = true;
-                    playing = false;
+                    isPaused = true;
+                    isPlaying = false;
                     setButton();
                     play.setImageResource(playButtonImage);
                     pause.setImageResource(pauseButtonImage);
@@ -161,8 +161,8 @@ public class NowPlayingActivity extends AppCompatActivity {
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playing = false;
-                paused = false;
+                isPlaying = false;
+                isPaused = false;
                 setButton();
                 play.setImageResource(playButtonImage);
                 pause.setImageResource(pauseButtonImage);
@@ -180,14 +180,14 @@ public class NowPlayingActivity extends AppCompatActivity {
         skipForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(position < music.size() - 1) {
+                if(position < NowPlayingActivity.this.songs.size() - 1) {
                     position += 1;
                 } else {
                     position = 0;
                 }
-                imageID = music.get(position).getImageId();
-                song = music.get(position).getMusicTitle();
-                album = music.get(position).getMusicDescription();
+                imageID = NowPlayingActivity.this.songs.get(position).getImageId();
+                song = NowPlayingActivity.this.songs.get(position).getMusicTitle();
+                album = NowPlayingActivity.this.songs.get(position).getMusicDescription();
 
                 songImage.setImageResource(imageID);
                 songName.setText(song);
@@ -205,16 +205,16 @@ public class NowPlayingActivity extends AppCompatActivity {
             }
         });
 
-        songs.setOnClickListener(new View.OnClickListener() {
+        allSongs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(NowPlayingActivity.this, SongActivity.class);
-                intent.putExtra(ID, identity);
+                intent.putExtra(IDENTITY, identity);
                 startActivity(intent);
             }
         });
 
-        albums.setOnClickListener(new View.OnClickListener() {
+        allAlbums.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(NowPlayingActivity.this, AlbumActivity.class);
@@ -224,10 +224,10 @@ public class NowPlayingActivity extends AppCompatActivity {
     }
 
     private void setButton() {
-        if (playing) {
+        if (isPlaying) {
             playButtonImage = R.drawable.ic_play_circle_filled_black_48dp;
             pauseButtonImage = R.drawable.ic_pause_circle_outline_black_48dp;
-        } else if(paused) {
+        } else if(isPaused) {
             playButtonImage = R.drawable.ic_play_circle_outline_black_48dp;
             pauseButtonImage = R.drawable.ic_pause_circle_filled_black_48dp;
         }  else {
@@ -237,35 +237,35 @@ public class NowPlayingActivity extends AppCompatActivity {
     }
 
     private void albumZero() {
-        music.add(new Music(R.drawable.a_new_beginning,
+        songs.add(new Music(R.drawable.a_new_beginning,
                 getResources().getString(R.string.new_beginning),
                 getResources().getString(R.string.bensound_sample_hits), 0));
-        music.add(new Music(R.drawable.creative_mind,
+        songs.add(new Music(R.drawable.creative_mind,
                 getResources().getString(R.string.creative_minds),
                 getResources().getString(R.string.bensound_sample_hits), 0));
-        music.add(new Music(R.drawable.cute,
+        songs.add(new Music(R.drawable.cute,
                 getResources().getString(R.string.cute),
                 getResources().getString(R.string.bensound_sample_hits), 0));
-        music.add(new Music(R.drawable.happy_rock,
+        songs.add(new Music(R.drawable.happy_rock,
                 getResources().getString(R.string.happy_rock),
                 getResources().getString(R.string.bensound_sample_hits), 0));
-        music.add(new Music(R.drawable.jazzy_frenchy,
+        songs.add(new Music(R.drawable.jazzy_frenchy,
                 getResources().getString(R.string.jazzy_frenchy),
                 getResources().getString(R.string.bensound_sample_hits), 0));
-        music.add(new Music(R.drawable.little_idea,
+        songs.add(new Music(R.drawable.little_idea,
                 getResources().getString(R.string.little_idea),
                 getResources().getString(R.string.bensound_sample_hits), 0));
-        music.add(new Music(R.drawable.summer,
+        songs.add(new Music(R.drawable.summer,
                 getResources().getString(R.string.summer),
                 getResources().getString(R.string.bensound_sample_hits), 0));
-        music.add(new Music(R.drawable.ukulele,
+        songs.add(new Music(R.drawable.ukulele,
                 getResources().getString(R.string.ukulele),
                 getResources().getString(R.string.bensound_sample_hits), 0));
     }
 
     private void albumOne() {
         for (int i = 0; i < ALBUM_LENGTH; i++) {
-            music.add(new Music(R.drawable.generic_cover,
+            songs.add(new Music(R.drawable.generic_cover,
                     getResources().getString(R.string.generic_song),
                     getResources().getString(R.string.generic_one), 1));
         }
@@ -273,7 +273,7 @@ public class NowPlayingActivity extends AppCompatActivity {
 
     private void albumTwo() {
         for (int i = 0; i < ALBUM_LENGTH; i++) {
-            music.add(new Music(R.drawable.generic_cover_two,
+            songs.add(new Music(R.drawable.generic_cover_two,
                     getResources().getString(R.string.generic_song),
                     getResources().getString(R.string.generic_two), 2));
         }
@@ -281,7 +281,7 @@ public class NowPlayingActivity extends AppCompatActivity {
 
     private void albumThree() {
         for (int i = 0; i < ALBUM_LENGTH; i++) {
-            music.add(new Music(R.drawable.generic_cover_3,
+            songs.add(new Music(R.drawable.generic_cover_3,
                     getResources().getString(R.string.generic_song),
                     getResources().getString(R.string.generic_three), 3));
         }
@@ -289,7 +289,7 @@ public class NowPlayingActivity extends AppCompatActivity {
 
     private void albumFour() {
         for (int i = 0; i < ALBUM_LENGTH; i++) {
-            music.add(new Music(R.drawable.generic_cover_four,
+            songs.add(new Music(R.drawable.generic_cover_four,
                     getResources().getString(R.string.generic_song),
                     getResources().getString(R.string.generic_four), 4));
         }
@@ -297,7 +297,7 @@ public class NowPlayingActivity extends AppCompatActivity {
 
     private void albumFive() {
         for (int i = 0; i < ALBUM_LENGTH; i++) {
-            music.add(new Music(R.drawable.generic_cover_five,
+            songs.add(new Music(R.drawable.generic_cover_five,
                     getResources().getString(R.string.generic_song),
                     getResources().getString(R.string.generic_five), 5));
         }
@@ -305,7 +305,7 @@ public class NowPlayingActivity extends AppCompatActivity {
 
     private void albumSix() {
         for (int i = 0; i < ALBUM_LENGTH; i++) {
-            music.add(new Music(R.drawable.generic_cover_six,
+            songs.add(new Music(R.drawable.generic_cover_six,
                     getResources().getString(R.string.generic_song),
                     getResources().getString(R.string.generic_six), 6));
         }
@@ -313,7 +313,7 @@ public class NowPlayingActivity extends AppCompatActivity {
 
     private void albumSeven() {
         for (int i = 0; i < ALBUM_LENGTH; i++) {
-            music.add(new Music(R.drawable.generic_cover_seven,
+            songs.add(new Music(R.drawable.generic_cover_seven,
                     getResources().getString(R.string.generic_song),
                     getResources().getString(R.string.generic_seven), 7));
         }

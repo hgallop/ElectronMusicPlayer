@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final static String ID ="id";
-    private final static String IMAGE = "imageId";
+    private final static String IDENTITY ="identity";
+    private final static String IMAGE_ID = "imageId";
     private final static String SONG = "song";
     private final static String ALBUM = "album";
 
@@ -20,11 +20,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final TextView albums = findViewById(R.id.albums);
-        final TextView songs = findViewById(R.id.songs);
+        final TextView allAlbums = findViewById(R.id.albums);
+        final TextView allSongs = findViewById(R.id.songs);
         final TextView nowPlaying = findViewById(R.id.now_playing);
 
-        albums.setOnClickListener(new View.OnClickListener() {
+        allAlbums.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AlbumActivity.class);
@@ -32,11 +32,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        songs.setOnClickListener(new View.OnClickListener() {
+        allSongs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SongActivity.class);
-                intent.putExtra(ID, identity);
+                intent.putExtra(IDENTITY, identity);
                 startActivity(intent);
             }
         });
@@ -50,10 +50,10 @@ public class MainActivity extends AppCompatActivity {
                 String album = getResources().getString(R.string.bensound_sample_hits);
 
                 Intent intent = new Intent(MainActivity.this, NowPlayingActivity.class);
-                intent.putExtra(IMAGE, imageId);
+                intent.putExtra(IMAGE_ID, imageId);
                 intent.putExtra(SONG, song);
                 intent.putExtra(ALBUM, album);
-                intent.putExtra(ID, identity);
+                intent.putExtra(IDENTITY, identity);
                 startActivity(intent);
 
             }

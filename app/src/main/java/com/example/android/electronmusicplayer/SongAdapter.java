@@ -27,17 +27,17 @@ public class SongAdapter extends ArrayAdapter<Music> {
             songListItem = LayoutInflater.from(getContext()).inflate(R.layout.song_item, parent, false);
         }
 
-        Music currentMusic = getItem(position);
+        Music currentSong = getItem(position);
 
         ImageView songArt = songListItem.findViewById(R.id.song_image);
-        assert currentMusic != null;
-        songArt.setImageResource(currentMusic.getImageId());
+        assert currentSong != null;
+        songArt.setImageResource(currentSong.getImageId());
 
         TextView songTitle = songListItem.findViewById(R.id.song_title);
-        songTitle.setText(currentMusic.getMusicTitle());
+        songTitle.setText(currentSong.getMusicTitle());
 
         TextView songAlbum = songListItem.findViewById(R.id.song_album);
-        songAlbum.setText(currentMusic.getMusicDescription());
+        songAlbum.setText(currentSong.getMusicDescription());
 
         return songListItem;
     }
