@@ -44,6 +44,12 @@ public class NowPlayingActivity extends AppCompatActivity {
     //creates an array list of music objects for each album
     final ArrayList<Music> songs = new ArrayList<>();
 
+    //variables for views that will be accessed by onRestore method
+    ImageView songImage;
+    TextView songName;
+    TextView albumName;
+    ImageButton play;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,12 +106,12 @@ public class NowPlayingActivity extends AppCompatActivity {
         }
 
         //initializes variables for all views in the layout
-        final ImageView songImage = findViewById(R.id.song_image);
-        final TextView songName = findViewById(R.id.song_title);
-        final TextView albumName = findViewById(R.id.album_title);
+        songImage = findViewById(R.id.song_image);
+        songName = findViewById(R.id.song_title);
+        albumName = findViewById(R.id.album_title);
+        play = findViewById(R.id.play_icon);
         final ImageButton skipBack = findViewById(R.id.skip_back);
         final ImageButton rewind = findViewById(R.id.rewind);
-        final ImageButton play = findViewById(R.id.play_icon);
         final ImageButton stop = findViewById(R.id.stop);
         final ImageButton fastForward = findViewById(R.id.fast_forward);
         final ImageButton skipForward = findViewById(R.id.skip_forward);
@@ -167,16 +173,18 @@ public class NowPlayingActivity extends AppCompatActivity {
                 if (isPlaying) {
                     isPaused = true;
                     isPlaying = false;
+                    //display a toast to the user to indicate that the button was clicked
+                    Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.play_paused), Toast.LENGTH_SHORT).show();
                 } else {
                     isPlaying = true;
                     isPaused = false;
+                    //display a toast to the user to indicate that the button was clicked
+                    Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.play_pressed), Toast.LENGTH_SHORT).show();
                 }
                 //help method to determine image resource to use
                 setButton();
                 //set image resource to the button view
                 play.setImageResource(playButtonImage);
-                //display a toast to the user to indicate that the button was clicked
-                Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.play_pressed), Toast.LENGTH_SHORT).show();
                 //this button would hold the logic to play or pause a media item based on the current state of the media item
             }
         });
@@ -286,6 +294,10 @@ public class NowPlayingActivity extends AppCompatActivity {
         isPlaying = savedInstanceState.getBoolean(IS_PLAYING);
         isPaused = savedInstanceState.getBoolean(IS_PAUSED);
         playButtonImage = savedInstanceState.getInt(PLAY_BUTTON_IMAGE);
+        play.setImageResource(playButtonImage);
+        songImage.setImageResource(imageID);
+        songName.setText(song);
+        albumName.setText(album);
     }
 
     // Return to previous activity

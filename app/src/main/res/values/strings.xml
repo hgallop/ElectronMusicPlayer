@@ -18,6 +18,7 @@
     <string name="stop_pressed">Stop</string>
     <string name="fast_forward_pressed">Fast Forward</string>
     <string name="skip_back_pressed">Skip Back</string>
+    <string name="play_paused">Pause</string>
 
 
 
