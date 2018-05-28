@@ -147,7 +147,7 @@ public class NowPlayingActivity extends AppCompatActivity {
                 songImage.setImageResource(imageID);
                 songName.setText(song);
                 albumName.setText(album);
-                Toast.makeText(NowPlayingActivity.this, "Skip Back", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.skip_back_pressed), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -155,7 +155,7 @@ public class NowPlayingActivity extends AppCompatActivity {
         rewind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(NowPlayingActivity.this, "Rewind", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.rewind_pressed), Toast.LENGTH_SHORT).show();
                 //this method would hold the logic to add a rewind feature to a media player
             }
         });
@@ -176,7 +176,7 @@ public class NowPlayingActivity extends AppCompatActivity {
                 //set image resource to the button view
                 play.setImageResource(playButtonImage);
                 //display a toast to the user to indicate that the button was clicked
-                Toast.makeText(NowPlayingActivity.this, "Play", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.play_pressed), Toast.LENGTH_SHORT).show();
                 //this button would hold the logic to play or pause a media item based on the current state of the media item
             }
         });
@@ -190,7 +190,7 @@ public class NowPlayingActivity extends AppCompatActivity {
                 setButton();
                 play.setImageResource(playButtonImage);
 
-                Toast.makeText(NowPlayingActivity.this, "Stop", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.stop_pressed), Toast.LENGTH_SHORT).show();
                 //this button would hold the logic to stop a media player item if playing
             }
         });
@@ -199,7 +199,7 @@ public class NowPlayingActivity extends AppCompatActivity {
         fastForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(NowPlayingActivity.this, "Fast Forward", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.fast_forward_pressed), Toast.LENGTH_SHORT).show();
                 //this would allow the user to move forward in the media item
             }
         });
@@ -224,7 +224,7 @@ public class NowPlayingActivity extends AppCompatActivity {
                 songName.setText(song);
                 albumName.setText(album);
 
-                Toast.makeText(NowPlayingActivity.this, "Skip Forward", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.skip_forward_pressed), Toast.LENGTH_SHORT).show();
             }
         });
 
