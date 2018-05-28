@@ -170,22 +170,24 @@ public class NowPlayingActivity extends AppCompatActivity {
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String toastMessage = "";
                 if (isPlaying) {
                     isPaused = true;
                     isPlaying = false;
                     //display a toast to the user to indicate that the button was clicked
-                    Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.play_paused), Toast.LENGTH_SHORT).show();
+                    toastMessage = getResources().getString(R.string.play_paused);
                 } else {
                     isPlaying = true;
                     isPaused = false;
                     //display a toast to the user to indicate that the button was clicked
-                    Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.play_pressed), Toast.LENGTH_SHORT).show();
+                    toastMessage= getResources().getString(R.string.play_pressed);
                 }
                 //help method to determine image resource to use
                 setButton();
                 //set image resource to the button view
                 play.setImageResource(playButtonImage);
                 //this button would hold the logic to play or pause a media item based on the current state of the media item
+                Toast.makeText(NowPlayingActivity.this, toastMessage, Toast.LENGTH_SHORT).show();
             }
         });
 
