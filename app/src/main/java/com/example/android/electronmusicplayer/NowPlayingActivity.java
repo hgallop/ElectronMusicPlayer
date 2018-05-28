@@ -21,6 +21,9 @@ public class NowPlayingActivity extends AppCompatActivity {
     private static final String SONG = "song";
     private static final String ALBUM = "album";
     private static final String IDENTITY = "identity";
+    private static final String IS_PLAYING = "isPlaying";
+    private static final String IS_PAUSED = "isPaused";
+    private static final String PLAY_BUTTON_IMAGE = "playButtonImage";
 
     //variables for play/pause button logic
     boolean isPlaying;
@@ -255,6 +258,34 @@ public class NowPlayingActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    //saves state of app data upon change
+    @Override
+     protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(POSITION, position);
+        outState.putInt(IMAGE_ID,  imageID);
+        outState.putString(SONG, song);
+        outState.putString(ALBUM, album);
+        outState.putInt(IDENTITY, identity);
+        outState.putBoolean(IS_PLAYING, isPlaying);
+        outState.putBoolean(IS_PAUSED, isPaused);
+        outState.putInt(PLAY_BUTTON_IMAGE, playButtonImage);
+    }
+
+    //restores state of app data
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        position = savedInstanceState.getInt(POSITION);
+        imageID = savedInstanceState.getInt(IMAGE_ID);
+        song = savedInstanceState.getString(SONG);
+        album = savedInstanceState.getString(ALBUM);
+        identity = savedInstanceState.getInt(IDENTITY);
+        isPlaying = savedInstanceState.getBoolean(IS_PLAYING);
+        isPaused = savedInstanceState.getBoolean(IS_PAUSED);
+        playButtonImage = savedInstanceState.getInt(PLAY_BUTTON_IMAGE);
     }
 
     // Return to previous activity

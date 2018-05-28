@@ -21,6 +21,8 @@ public class SongActivity extends AppCompatActivity {
     //variable to store an arbitrary album length
     private static final int ALBUM_LENGTH = 8;
 
+    int identity;
+
     //creates an array list of music objects for each song
     final ArrayList<Music> songs = new ArrayList<>();
 
@@ -31,7 +33,7 @@ public class SongActivity extends AppCompatActivity {
 
         //receives the information sent along from other activities
         Intent intent = getIntent();
-        int identity = intent.getIntExtra(IDENTITY, 0);
+        identity = intent.getIntExtra(IDENTITY, 0);
 
         // Add a return to previous screen in top left corner
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -109,6 +111,20 @@ public class SongActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    //save app data upon change
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(IDENTITY, identity);
+    }
+
+    //restore app data
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        identity = savedInstanceState.getInt(IDENTITY);
     }
 
     // Return to previous activity
