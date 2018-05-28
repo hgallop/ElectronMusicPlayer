@@ -15,24 +15,30 @@ import java.util.ArrayList;
 
 public class NowPlayingActivity extends AppCompatActivity {
 
+    //keys for save/restore and for intent extras
     private static final String POSITION = "position";
     private static final String IMAGE_ID = "imageId";
     private static final String SONG = "song";
     private static final String ALBUM = "album";
     private static final String IDENTITY = "identity";
 
+    //variables for play/pause button logic
     boolean isPlaying;
     boolean isPaused;
     int playButtonImage;
 
+    //variable for storing which song position was chosen from the array list
     int position;
+    //variables to store intent extras received from the previous activity
     int imageID;
     String song;
     String album;
     int identity;
 
+    //variable to store an arbitrary album length
     private static final int ALBUM_LENGTH = 8;
 
+    //creates an array list of music objects for each album
     final ArrayList<Music> songs = new ArrayList<>();
 
     @Override
@@ -40,6 +46,7 @@ public class NowPlayingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playing);
 
+        //receives the information sent along from other activities
         Intent intent = getIntent();
         position = intent.getIntExtra(POSITION, 0);
         imageID = intent.getIntExtra(IMAGE_ID, 0);
@@ -50,6 +57,7 @@ public class NowPlayingActivity extends AppCompatActivity {
         // Add a return to previous screen in top left corner
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //switch statement uses identity to create needed songs array list(s) by calling the correct helper method for each album
         switch (identity) {
             case 0:
                 albumZero();
@@ -88,6 +96,7 @@ public class NowPlayingActivity extends AppCompatActivity {
 
         }
 
+        //initializes variables for all views in the layout
         final ImageView songImage = findViewById(R.id.song_image);
         final TextView songName = findViewById(R.id.song_title);
         final TextView albumName = findViewById(R.id.album_title);
@@ -102,16 +111,21 @@ public class NowPlayingActivity extends AppCompatActivity {
         final Button allAlbums = findViewById(R.id.albums);
 
 
+        //sets value to true or false depending on which activity the user navigated from
         isPlaying = identity != 8;
         isPaused = !isPlaying;
+        //calls method to choose correct image resource for play or pause button
         setButton();
 
+        //set play/pause button to correct image
         play.setImageResource(playButtonImage);
 
+        //set song information to views
         songImage.setImageResource(imageID);
         songName.setText(song);
         albumName.setText(album);
 
+        //creates functionality to allow user to skip backwards through all songs in the array list
         skipBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,10 +135,12 @@ public class NowPlayingActivity extends AppCompatActivity {
                     position = NowPlayingActivity.this.songs.size() - 1;
                 }
 
+                //resets song information to the current song based on position in the array list
                 imageID = NowPlayingActivity.this.songs.get(position).getImageId();
                 song = NowPlayingActivity.this.songs.get(position).getMusicTitle();
                 album = NowPlayingActivity.this.songs.get(position).getMusicDescription();
 
+                //set the views to display the song information
                 songImage.setImageResource(imageID);
                 songName.setText(song);
                 albumName.setText(album);
@@ -132,13 +148,16 @@ public class NowPlayingActivity extends AppCompatActivity {
             }
         });
 
+        //displays a toast to indicate to the user that the button was clicked
         rewind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(NowPlayingActivity.this, "Rewind", Toast.LENGTH_SHORT).show();
+                //this method would hold the logic to add a rewind feature to a media player
             }
         });
 
+        //determines the current state of the button and displays play or pause based on the state
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,12 +168,17 @@ public class NowPlayingActivity extends AppCompatActivity {
                     isPlaying = true;
                     isPaused = false;
                 }
+                //help method to determine image resource to use
                 setButton();
+                //set image resource to the button view
                 play.setImageResource(playButtonImage);
+                //display a toast to the user to indicate that the button was clicked
                 Toast.makeText(NowPlayingActivity.this, "Play", Toast.LENGTH_SHORT).show();
+                //this button would hold the logic to play or pause a media item based on the current state of the media item
             }
         });
 
+        //sets the state of the play button and display a message to the user to indicate the button was clicked
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -162,17 +186,22 @@ public class NowPlayingActivity extends AppCompatActivity {
                 isPaused = false;
                 setButton();
                 play.setImageResource(playButtonImage);
+
                 Toast.makeText(NowPlayingActivity.this, "Stop", Toast.LENGTH_SHORT).show();
+                //this button would hold the logic to stop a media player item if playing
             }
         });
 
+        //displays a toast to indicate to the user that the button was pressed
         fastForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(NowPlayingActivity.this, "Fast Forward", Toast.LENGTH_SHORT).show();
+                //this would allow the user to move forward in the media item
             }
         });
 
+        //allows user to skip forward through the array list of songs
         skipForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,10 +210,13 @@ public class NowPlayingActivity extends AppCompatActivity {
                 } else {
                     position = 0;
                 }
+
+                //gets the song information for the current selection
                 imageID = NowPlayingActivity.this.songs.get(position).getImageId();
                 song = NowPlayingActivity.this.songs.get(position).getMusicTitle();
                 album = NowPlayingActivity.this.songs.get(position).getMusicDescription();
 
+                //sets the song information to the views
                 songImage.setImageResource(imageID);
                 songName.setText(song);
                 albumName.setText(album);
@@ -193,6 +225,7 @@ public class NowPlayingActivity extends AppCompatActivity {
             }
         });
 
+        //this button allows the user to return the the main screen of the app
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -202,6 +235,7 @@ public class NowPlayingActivity extends AppCompatActivity {
             }
         });
 
+        //allows the user to navigate to the song list
         allSongs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -212,6 +246,7 @@ public class NowPlayingActivity extends AppCompatActivity {
             }
         });
 
+        //allows the user to navigate to the album list
         allAlbums.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -229,6 +264,7 @@ public class NowPlayingActivity extends AppCompatActivity {
         return true;
     }
 
+    //helper method to determine which image resource should be displayed for the play/pause button
     private void setButton() {
         if (isPlaying) {
             playButtonImage = R.drawable.ic_play_circle_filled_black_48dp;
@@ -239,6 +275,7 @@ public class NowPlayingActivity extends AppCompatActivity {
         }
     }
 
+    //helper method to create an array of music objects to represent all the songs on the album in the 0th position of the albums array list from the album activity
     private void albumZero() {
         songs.add(new Music(R.drawable.a_new_beginning,
                 getResources().getString(R.string.new_beginning),
@@ -266,7 +303,9 @@ public class NowPlayingActivity extends AppCompatActivity {
                 getResources().getString(R.string.bensound_sample_hits), 0));
     }
 
+    //helper method to create an array of music objects to represent all the songs on the album in the 1st position of the albums array list from the album activity.
     private void albumOne() {
+        //creates the array with a loop since identical dummy data is being applied to each position of this array list
         for (int i = 0; i < ALBUM_LENGTH; i++) {
             songs.add(new Music(R.drawable.generic_cover,
                     getResources().getString(R.string.generic_song),
@@ -274,7 +313,9 @@ public class NowPlayingActivity extends AppCompatActivity {
         }
     }
 
+    //helper method to create an array of music objects to represent all the songs on the album in the 2nd position of the albums array list from the album activity.
     private void albumTwo() {
+        //creates the array with a loop since identical dummy data is being applied to each position of this array list
         for (int i = 0; i < ALBUM_LENGTH; i++) {
             songs.add(new Music(R.drawable.generic_cover_two,
                     getResources().getString(R.string.generic_song),
@@ -282,7 +323,9 @@ public class NowPlayingActivity extends AppCompatActivity {
         }
     }
 
+    //helper method to create an array of music objects to represent all the songs on the album in the 3rd position of the albums array list from the album activity.
     private void albumThree() {
+        //creates the array with a loop since identical dummy data is being applied to each position of this array list
         for (int i = 0; i < ALBUM_LENGTH; i++) {
             songs.add(new Music(R.drawable.generic_cover_3,
                     getResources().getString(R.string.generic_song),
@@ -290,7 +333,9 @@ public class NowPlayingActivity extends AppCompatActivity {
         }
     }
 
+    //helper method to create an array of music objects to represent all the songs on the album in the 4th position of the albums array list from the album activity.
     private void albumFour() {
+        //creates the array with a loop since identical dummy data is being applied to each position of this array list
         for (int i = 0; i < ALBUM_LENGTH; i++) {
             songs.add(new Music(R.drawable.generic_cover_four,
                     getResources().getString(R.string.generic_song),
@@ -298,7 +343,9 @@ public class NowPlayingActivity extends AppCompatActivity {
         }
     }
 
+    //helper method to create an array of music objects to represent all the songs on the album in the 5th position of the albums array list from the album activity.
     private void albumFive() {
+        //creates the array with a loop since identical dummy data is being applied to each position of this array list
         for (int i = 0; i < ALBUM_LENGTH; i++) {
             songs.add(new Music(R.drawable.generic_cover_five,
                     getResources().getString(R.string.generic_song),
@@ -306,7 +353,9 @@ public class NowPlayingActivity extends AppCompatActivity {
         }
     }
 
+    //helper method to create an array of music objects to represent all the songs on the album in the 6th position of the albums array list from the album activity.
     private void albumSix() {
+        //creates the array with a loop since identical dummy data is being applied to each position of this array list
         for (int i = 0; i < ALBUM_LENGTH; i++) {
             songs.add(new Music(R.drawable.generic_cover_six,
                     getResources().getString(R.string.generic_song),
@@ -314,7 +363,9 @@ public class NowPlayingActivity extends AppCompatActivity {
         }
     }
 
+    //helper method to create an array of music objects to represent all the songs on the album in the 7th position of the albums array list from the album activity.
     private void albumSeven() {
+        //creates the array with a loop since identical dummy data is being applied to each position of this array list
         for (int i = 0; i < ALBUM_LENGTH; i++) {
             songs.add(new Music(R.drawable.generic_cover_seven,
                     getResources().getString(R.string.generic_song),

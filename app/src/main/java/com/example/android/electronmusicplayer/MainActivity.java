@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    //keys for saving/restoring data and sending/receiving intents
+    //keys for sending intent
     private final static String IDENTITY ="identity";
     private final static String IMAGE_ID = "imageId";
     private final static String SONG = "song";

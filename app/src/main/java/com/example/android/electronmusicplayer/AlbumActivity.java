@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class AlbumActivity extends AppCompatActivity {
 
+    //key for save/restore and retrieving intent extra
     private static final String IDENTITY = "identity";
 
     @Override
@@ -21,8 +22,10 @@ public class AlbumActivity extends AppCompatActivity {
         // Add a return to previous screen in top left corner
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //declare an array of albums
         final ArrayList<Music> albums = new ArrayList<>();
 
+        //add music objects to the album array
         albums.add(new Music(R.drawable.bensound_album_cover,
                 getResources().getString(R.string.bensound_sample_hits),
                 getResources().getString(R.string.sample_description), 0));
@@ -48,18 +51,24 @@ public class AlbumActivity extends AppCompatActivity {
                 getResources().getString(R.string.generic_seven),
                 getResources().getString(R.string.generic_desc), 7));
 
-        ListView musicList = findViewById(R.id.list);
+        //access the list layout
+        ListView albumList = findViewById(R.id.list);
 
+        //create custom adapter object to handle displaying the array list to the layout
         AlbumAdapter albumAdapter = new AlbumAdapter(this, albums);
 
-        musicList.setAdapter(albumAdapter);
+        //connect adapter to the list layout
+        albumList.setAdapter(albumAdapter);
 
-        musicList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        //set a click listener on each array list item displayed
+        albumList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                //store the value of the list item identity
                 int identity = albums.get(position).getIdentity();
 
+                //create an intent to start the song activity, send along identity of item clicked, flag activity to recall song activity to the top if it already exists
                 Intent intent = new Intent(AlbumActivity.this, SongActivity.class);
                 intent.putExtra(IDENTITY, identity);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

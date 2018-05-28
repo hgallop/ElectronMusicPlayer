@@ -11,14 +11,17 @@ import java.util.ArrayList;
 
 public class SongActivity extends AppCompatActivity {
 
+    //keys for save/restore and retrieving intent extra
     private static final String POSITION = "position";
     private static final String IMAGE_ID = "imageId";
     private static final String SONG = "song";
     private static final String ALBUM = "album";
     private static final String IDENTITY = "identity";
 
+    //variable to store an arbitrary album length
     private static final int ALBUM_LENGTH = 8;
 
+    //creates an array list of music objects for each song
     final ArrayList<Music> songs = new ArrayList<>();
 
     @Override
@@ -26,12 +29,14 @@ public class SongActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.music_list);
 
+        //receives the information sent along from other activities
         Intent intent = getIntent();
         int identity = intent.getIntExtra(IDENTITY, 0);
 
         // Add a return to previous screen in top left corner
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //switch statement uses identity to create needed songs array list(s) by calling the correct helper method for each album
         switch (identity) {
             case 0:
                 albumZero();
@@ -66,33 +71,41 @@ public class SongActivity extends AppCompatActivity {
                 albumFive();
                 albumSix();
                 albumSeven();
+                //resets the identity of each song in the list to 8 in order to send the identity to the next activity
                 for(int i = 0; i < songs.size(); i++) {
                     songs.get(i).setIdentity(8);
                 }
                 break;
         }
 
+        //access the list layout
         ListView songList = findViewById(R.id.list);
 
+        //create custom adapter object to handle displaying the array list to the layout
         SongAdapter songAdapter = new SongAdapter(this, songs);
 
+        //connect adapter to the list layout
         songList.setAdapter(songAdapter);
 
+        //set a click listener on each array list item displayed
         songList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                //store information from the array list item clicked
                 int imageId = songs.get(position).getImageId();
                 String songTitle = songs.get(position).getMusicTitle();
                 String albumTitle = songs.get(position).getMusicDescription();
                 int identity = songs.get(position).getIdentity();
 
+                //create an intent to start the now playing activity, send along values of item clicked, flag activity to recall now playing activity to the top if it already exists
                 Intent intent = new Intent(SongActivity.this, NowPlayingActivity.class);
                 intent.putExtra(POSITION, position);
                 intent.putExtra(IMAGE_ID, imageId);
                 intent.putExtra(SONG, songTitle);
                 intent.putExtra(ALBUM, albumTitle);
                 intent.putExtra(IDENTITY, identity);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
@@ -105,6 +118,7 @@ public class SongActivity extends AppCompatActivity {
         return true;
     }
 
+    //helper method to create an array of music objects to represent all the songs on the album in the 0th position of the albums array list from the album activity
     private void albumZero() {
         songs.add(new Music(R.drawable.a_new_beginning,
                 getResources().getString(R.string.new_beginning),
@@ -132,7 +146,9 @@ public class SongActivity extends AppCompatActivity {
                 getResources().getString(R.string.bensound_sample_hits), 0));
     }
 
+    //helper method to create an array of music objects to represent all the songs on the album in the 1st position of the albums array list from the album activity.
     private void albumOne() {
+        //creates the array with a loop since identical dummy data is being applied to each position of this array list
         for (int i = 0; i < ALBUM_LENGTH; i++) {
             songs.add(new Music(R.drawable.generic_cover,
                     getResources().getString(R.string.generic_song),
@@ -140,7 +156,9 @@ public class SongActivity extends AppCompatActivity {
         }
     }
 
+    //helper method to create an array of music objects to represent all the songs on the album in the 2nd position of the albums array list from the album activity.
     private void albumTwo() {
+        //creates the array with a loop since identical dummy data is being applied to each position of this array list
         for (int i = 0; i < ALBUM_LENGTH; i++) {
             songs.add(new Music(R.drawable.generic_cover_two,
                     getResources().getString(R.string.generic_song),
@@ -148,7 +166,9 @@ public class SongActivity extends AppCompatActivity {
         }
     }
 
+    //helper method to create an array of music objects to represent all the songs on the album in the 3rd position of the albums array list from the album activity.
     private void albumThree() {
+        //creates the array with a loop since identical dummy data is being applied to each position of this array list
         for (int i = 0; i < ALBUM_LENGTH; i++) {
             songs.add(new Music(R.drawable.generic_cover_3,
                     getResources().getString(R.string.generic_song),
@@ -156,7 +176,9 @@ public class SongActivity extends AppCompatActivity {
         }
     }
 
+    //helper method to create an array of music objects to represent all the songs on the album in the 4th position of the albums array list from the album activity.
     private void albumFour() {
+        //creates the array with a loop since identical dummy data is being applied to each position of this array list
         for (int i = 0; i < ALBUM_LENGTH; i++) {
             songs.add(new Music(R.drawable.generic_cover_four,
                     getResources().getString(R.string.generic_song),
@@ -164,7 +186,9 @@ public class SongActivity extends AppCompatActivity {
         }
     }
 
+    //helper method to create an array of music objects to represent all the songs on the album in the 5th position of the albums array list from the album activity.
     private void albumFive() {
+        //creates the array with a loop since identical dummy data is being applied to each position of this array list
         for (int i = 0; i < ALBUM_LENGTH; i++) {
             songs.add(new Music(R.drawable.generic_cover_five,
                     getResources().getString(R.string.generic_song),
@@ -172,7 +196,9 @@ public class SongActivity extends AppCompatActivity {
         }
     }
 
+    //helper method to create an array of music objects to represent all the songs on the album in the 5th position of the albums array list from the album activity.
     private void albumSix() {
+        //creates the array with a loop since identical dummy data is being applied to each position of this array list
         for (int i = 0; i < ALBUM_LENGTH; i++) {
             songs.add(new Music(R.drawable.generic_cover_six,
                     getResources().getString(R.string.generic_song),
@@ -180,7 +206,9 @@ public class SongActivity extends AppCompatActivity {
         }
     }
 
+    //helper method to create an array of music objects to represent all the songs on the album in the 5th position of the albums array list from the album activity.
     private void albumSeven() {
+        //creates the array with a loop since identical dummy data is being applied to each position of this array list
         for (int i = 0; i < ALBUM_LENGTH; i++) {
             songs.add(new Music(R.drawable.generic_cover_seven,
                     getResources().getString(R.string.generic_song),
