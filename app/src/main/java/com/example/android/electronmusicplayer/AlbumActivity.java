@@ -31,25 +31,25 @@ public class AlbumActivity extends AppCompatActivity {
                 getResources().getString(R.string.sample_description), 0));
         albums.add(new Music(R.drawable.generic_cover,
                 getResources().getString(R.string.generic_one),
-                getResources().getString(R.string.generic_desc), 1));
+                getResources().getString(R.string.generic_description), 1));
         albums.add(new Music(R.drawable.generic_cover_two,
                 getResources().getString(R.string.generic_two),
-                getResources().getString(R.string.generic_desc), 2));
+                getResources().getString(R.string.generic_description), 2));
         albums.add(new Music(R.drawable.generic_cover_3,
                 getResources().getString(R.string.generic_three),
-                getResources().getString(R.string.generic_desc), 3));
+                getResources().getString(R.string.generic_description), 3));
         albums.add(new Music(R.drawable.generic_cover_four,
                 getResources().getString(R.string.generic_four),
-                getResources().getString(R.string.generic_desc), 4));
+                getResources().getString(R.string.generic_description), 4));
         albums.add(new Music(R.drawable.generic_cover_five,
                 getResources().getString(R.string.generic_five),
-                getResources().getString(R.string.generic_desc), 5));
+                getResources().getString(R.string.generic_description), 5));
         albums.add(new Music(R.drawable.generic_cover_six,
                 getResources().getString(R.string.generic_six),
-                getResources().getString(R.string.generic_desc), 6));
+                getResources().getString(R.string.generic_description), 6));
         albums.add(new Music(R.drawable.generic_cover_seven,
                 getResources().getString(R.string.generic_seven),
-                getResources().getString(R.string.generic_desc), 7));
+                getResources().getString(R.string.generic_description), 7));
 
         //access the list layout
         ListView albumList = findViewById(R.id.list);

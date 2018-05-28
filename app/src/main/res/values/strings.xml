@@ -8,8 +8,7 @@
     <string name="albums">Albums</string>
     <string name="play">Play button</string>
     <string name="rewind_button">Rewind button</string>
-    <string name="skip_track_backwards">Skip track backwards</string>
-    <string name="pause_button">Pause button</string>
+    <string name="skip_track_backwards">Skip track backwards button</string>
     <string name="stop">Stop button</string>
     <string name="fast_forward_button">Fast forward button</string>
     <string name="skip_track_forward">Skip track forward button</string>
@@ -32,7 +31,7 @@
     <string name="generic_five">Generic Five: Generic Album</string>
     <string name="generic_six">Generic Six: Generic Album</string>
     <string name="generic_seven">Generic Seven: Generic Album</string>
-    <string name="generic_desc">A generic artist playing generic music.</string>
+    <string name="generic_description">A generic artist playing generic music.</string>
 
     <!--Song info-->
     <string name="ukulele">Ukulele</string>
