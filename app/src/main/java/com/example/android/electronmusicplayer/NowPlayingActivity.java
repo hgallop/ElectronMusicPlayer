@@ -324,28 +324,28 @@ public class NowPlayingActivity extends AppCompatActivity {
     private void albumZero() {
         songs.add(new Music(R.drawable.a_new_beginning,
                 getResources().getString(R.string.new_beginning),
-                getResources().getString(R.string.bensound_sample_hits), 0));
+                getResources().getString(R.string.bensound_sample_hits), 0, R.raw.bensound_anewbeginning));
         songs.add(new Music(R.drawable.creative_mind,
                 getResources().getString(R.string.creative_minds),
-                getResources().getString(R.string.bensound_sample_hits), 0));
+                getResources().getString(R.string.bensound_sample_hits), 0, R.raw.bensound_creativeminds));
         songs.add(new Music(R.drawable.cute,
                 getResources().getString(R.string.cute),
-                getResources().getString(R.string.bensound_sample_hits), 0));
+                getResources().getString(R.string.bensound_sample_hits), 0, R.raw.bensound_cute));
         songs.add(new Music(R.drawable.happy_rock,
                 getResources().getString(R.string.happy_rock),
-                getResources().getString(R.string.bensound_sample_hits), 0));
+                getResources().getString(R.string.bensound_sample_hits), 0, R.raw.bensound_happyrock));
         songs.add(new Music(R.drawable.jazzy_frenchy,
                 getResources().getString(R.string.jazzy_frenchy),
-                getResources().getString(R.string.bensound_sample_hits), 0));
+                getResources().getString(R.string.bensound_sample_hits), 0, R.raw.bensound_jazzyfrenchy));
         songs.add(new Music(R.drawable.little_idea,
                 getResources().getString(R.string.little_idea),
-                getResources().getString(R.string.bensound_sample_hits), 0));
+                getResources().getString(R.string.bensound_sample_hits), 0, R.raw.bensound_littleidea));
         songs.add(new Music(R.drawable.summer,
                 getResources().getString(R.string.summer),
-                getResources().getString(R.string.bensound_sample_hits), 0));
+                getResources().getString(R.string.bensound_sample_hits), 0, R.raw.bensound_summer));
         songs.add(new Music(R.drawable.ukulele,
                 getResources().getString(R.string.ukulele),
-                getResources().getString(R.string.bensound_sample_hits), 0));
+                getResources().getString(R.string.bensound_sample_hits), 0, R.raw.bensound_ukulele));
     }
 
     //helper method to create an array of music objects to represent all the songs on the album in the 1st position of the albums array list from the album activity.

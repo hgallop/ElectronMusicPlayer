@@ -26,26 +26,27 @@ public class AlbumAdapter extends ArrayAdapter<Music> {
         View albumListItem = convertView;
 
         //inflates a layout for list items if no layout is already active
-        if(albumListItem == null){
+        if (albumListItem == null) {
             albumListItem = LayoutInflater.from(getContext()).inflate(R.layout.album_item, parent, false);
         }
 
         //variable that stores the current list item
         Music currentAlbum = getItem(position);
 
-        //access and set the image view for the image resource of the current music item
+        //access the image view
         ImageView albumCover = albumListItem.findViewById(R.id.album_image);
-        assert currentAlbum != null;
-        albumCover.setImageResource(currentAlbum.getImageId());
-
-        //access and set the title view for the string resource of the current music item
+        //access the title view
         TextView albumTitle = albumListItem.findViewById(R.id.album_title);
-        albumTitle.setText(currentAlbum.getMusicTitle());
-
-        //access and set the description view for the string resource of the current music item
+        //access the description view
         TextView albumDescription = albumListItem.findViewById(R.id.album_description);
-        albumDescription.setText(currentAlbum.getMusicDescription());
-
+        if (currentAlbum != null) {
+            //set the image view for the image resource of the current music item
+            albumCover.setImageResource(currentAlbum.getImageId());
+            //set the title view for the string resource of the current music item
+            albumTitle.setText(currentAlbum.getMusicTitle());
+            //set the description view for the string resource of the current music item
+            albumDescription.setText(currentAlbum.getMusicDescription());
+        }
         //return the current item to display in the list layout
         return albumListItem;
 

@@ -33,18 +33,21 @@ public class SongAdapter extends ArrayAdapter<Music> {
         //variable that stores the current list item
         Music currentSong = getItem(position);
 
-       //access and set the image view for the image resource of the current music item
+       //access the image view
         ImageView songArt = songListItem.findViewById(R.id.song_image);
-        assert currentSong != null;
-        songArt.setImageResource(currentSong.getImageId());
-
-        //access and set the title view for the string resource of the current music item
+        //access the title view
         TextView songTitle = songListItem.findViewById(R.id.song_title);
-        songTitle.setText(currentSong.getMusicTitle());
-
-        //access and set the album title view for the string resource of the current music item
+        //access the album title view
         TextView songAlbum = songListItem.findViewById(R.id.song_album);
-        songAlbum.setText(currentSong.getMusicDescription());
+        //check that current song is not null
+        if(currentSong != null) {
+            //set the image view for the image resource of the current music item
+            songArt.setImageResource(currentSong.getImageId());
+            //set the title view for the string resource of the current music item
+            songTitle.setText(currentSong.getMusicTitle());
+            //set the album title view for the string resource of the current music item
+            songAlbum.setText(currentSong.getMusicDescription());
+        }
 
         //return the current item to display in the list layout
         return songListItem;
