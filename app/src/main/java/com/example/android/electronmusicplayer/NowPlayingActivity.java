@@ -1,6 +1,10 @@
 package com.example.android.electronmusicplayer;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +28,7 @@ public class NowPlayingActivity extends AppCompatActivity {
     private static final String IS_PLAYING = "isPlaying";
     private static final String IS_PAUSED = "isPaused";
     private static final String PLAY_BUTTON_IMAGE = "playButtonImage";
+    private static final String SONG_ID = "songID";
 
     //variables for play/pause button logic
     boolean isPlaying;
@@ -37,6 +42,7 @@ public class NowPlayingActivity extends AppCompatActivity {
     String song;
     String album;
     int identity;
+    int songID;
 
     //variable to store an arbitrary album length
     private static final int ALBUM_LENGTH = 8;
@@ -49,6 +55,9 @@ public class NowPlayingActivity extends AppCompatActivity {
     TextView songName;
     TextView albumName;
     ImageButton play;
+
+    //variable for media player object
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +110,10 @@ public class NowPlayingActivity extends AppCompatActivity {
                 albumFive();
                 albumSix();
                 albumSeven();
+                //resets the identity of each song in the list to 8 in order to check the identity for the media player
+                for(int i = 0; i < songs.size(); i++) {
+                    songs.get(i).setIdentity(8);
+                }
                 break;
 
         }
@@ -134,10 +147,22 @@ public class NowPlayingActivity extends AppCompatActivity {
         songName.setText(song);
         albumName.setText(album);
 
+        if(songs.get(position).hasSong()) {
+            songID = songs.get(position).getSong();
+            mediaPlayer = MediaPlayer.create(NowPlayingActivity.this, songID);
+        }
+        if(identity != 8) {
+            mediaPlayer.start();
+        }
+
         //creates functionality to allow user to skip backwards through all songs in the array list
         skipBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(songs.get(position).hasSong()) {
+                    mediaPlayer.stop();
+                    mediaPlayer.release();
+                }
                 if (position > 0) {
                     position -= 1;
                 } else {
@@ -153,30 +178,61 @@ public class NowPlayingActivity extends AppCompatActivity {
                 songImage.setImageResource(imageID);
                 songName.setText(song);
                 albumName.setText(album);
+
+                if(songs.get(position).hasSong()) {
+                    songID = NowPlayingActivity.this.songs.get(position).getSong();
+                    //set the media player to the next song
+                    mediaPlayer = MediaPlayer.create(NowPlayingActivity.this, songID);
+                    mediaPlayer.start();
+                }
+
+                isPlaying = true;
+                setButton();
+                play.setImageResource(playButtonImage);
+
                 Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.skip_back_pressed), Toast.LENGTH_SHORT).show();
             }
         });
 
-        //displays a toast to indicate to the user that the button was clicked
-        rewind.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.rewind_pressed), Toast.LENGTH_SHORT).show();
-                //this method would hold the logic to add a rewind feature to a media player
-            }
-        });
+        if(songs.get(position).hasSong()) {
 
+            rewind.setOnLongClickListener(new View.OnLongClickListener() {
+                @TargetApi(Build.VERSION_CODES.O)
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public boolean onLongClick(View v) {
+                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() - 5000);
+                    Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.rewind_pressed), Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+            });
+        } else {
+            //displays a toast to indicate to the user that the button was clicked
+            rewind.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.rewind_pressed), Toast.LENGTH_SHORT).show();
+                    //this method would hold the logic to add a rewind feature to a media player
+                }
+            });
+        }
         //determines the current state of the button and displays play or pause based on the state
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String toastMessage = "";
+                String toastMessage;
                 if (isPlaying) {
+                    if(songs.get(position).hasSong()) {
+                        mediaPlayer.pause();
+                    }
                     isPaused = true;
                     isPlaying = false;
                     //display a toast to the user to indicate that the button was clicked
                     toastMessage = getResources().getString(R.string.play_paused);
                 } else {
+                    if(songs.get(position).hasSong()) {
+                        mediaPlayer.start();
+                    }
                     isPlaying = true;
                     isPaused = false;
                     //display a toast to the user to indicate that the button was clicked
@@ -195,29 +251,53 @@ public class NowPlayingActivity extends AppCompatActivity {
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(songs.get(position).hasSong()) {
+                    mediaPlayer.stop();
+                }
                 isPlaying = false;
                 isPaused = false;
                 setButton();
                 play.setImageResource(playButtonImage);
 
+                if(songs.get(position).hasSong()) {
+                    //prepare media player to play song when user chooses anotheer button
+                    songID = NowPlayingActivity.this.songs.get(position).getSong();
+                    mediaPlayer = MediaPlayer.create(NowPlayingActivity.this, songID);
+                }
                 Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.stop_pressed), Toast.LENGTH_SHORT).show();
                 //this button would hold the logic to stop a media player item if playing
             }
         });
 
-        //displays a toast to indicate to the user that the button was pressed
-        fastForward.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.fast_forward_pressed), Toast.LENGTH_SHORT).show();
-                //this would allow the user to move forward in the media item
-            }
-        });
-
+        if(songs.get(position).hasSong()) {
+            fastForward.setOnLongClickListener(new View.OnLongClickListener() {
+                @TargetApi(Build.VERSION_CODES.O)
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public boolean onLongClick(View v) {
+                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() + 5000);
+                    Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.fast_forward_pressed), Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+            });
+        } else {
+            //displays a toast to indicate to the user that the button was pressed
+            fastForward.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.fast_forward_pressed), Toast.LENGTH_SHORT).show();
+                    //this would allow the user to move forward in the media item
+                }
+            });
+        }
         //allows user to skip forward through the array list of songs
         skipForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(songs.get(position).hasSong()) {
+                    mediaPlayer.stop();
+                    mediaPlayer.release();
+                }
                 if (position < NowPlayingActivity.this.songs.size() - 1) {
                     position += 1;
                 } else {
@@ -228,11 +308,24 @@ public class NowPlayingActivity extends AppCompatActivity {
                 imageID = NowPlayingActivity.this.songs.get(position).getImageId();
                 song = NowPlayingActivity.this.songs.get(position).getMusicTitle();
                 album = NowPlayingActivity.this.songs.get(position).getMusicDescription();
+                songID = NowPlayingActivity.this.songs.get(position).getSong();
 
                 //sets the song information to the views
                 songImage.setImageResource(imageID);
                 songName.setText(song);
                 albumName.setText(album);
+
+                if(songs.get(position).hasSong()) {
+                    //prepare media player to play song when user chooses another button
+                    songID = NowPlayingActivity.this.songs.get(position).getSong();
+                    //set the media player to the next song
+                    mediaPlayer = MediaPlayer.create(NowPlayingActivity.this, songID);
+                    mediaPlayer.start();
+                }
+
+                isPlaying = true;
+                setButton();
+                play.setImageResource(playButtonImage);
 
                 Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.skip_forward_pressed), Toast.LENGTH_SHORT).show();
             }
@@ -242,6 +335,10 @@ public class NowPlayingActivity extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(songs.get(position).hasSong()) {
+                    mediaPlayer.stop();
+                    mediaPlayer.release();
+                }
                 Intent intent = new Intent(NowPlayingActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
@@ -252,6 +349,8 @@ public class NowPlayingActivity extends AppCompatActivity {
         allSongs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mediaPlayer.stop();
+                mediaPlayer.release();
                 Intent intent = new Intent(NowPlayingActivity.this, SongActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra(IDENTITY, identity);
@@ -263,11 +362,23 @@ public class NowPlayingActivity extends AppCompatActivity {
         allAlbums.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(songs.get(position).hasSong()) {
+                    mediaPlayer.stop();
+                    mediaPlayer.release();
+                }
                 Intent intent = new Intent(NowPlayingActivity.this, AlbumActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(songs.get(position).hasSong()) {
+            mediaPlayer.release();
+        }
     }
 
     //saves state of app data upon change
@@ -282,6 +393,7 @@ public class NowPlayingActivity extends AppCompatActivity {
         outState.putBoolean(IS_PLAYING, isPlaying);
         outState.putBoolean(IS_PAUSED, isPaused);
         outState.putInt(PLAY_BUTTON_IMAGE, playButtonImage);
+        outState.putInt(SONG_ID, songID);
     }
 
     //restores state of app data
@@ -296,6 +408,7 @@ public class NowPlayingActivity extends AppCompatActivity {
         isPlaying = savedInstanceState.getBoolean(IS_PLAYING);
         isPaused = savedInstanceState.getBoolean(IS_PAUSED);
         playButtonImage = savedInstanceState.getInt(PLAY_BUTTON_IMAGE);
+        songID = savedInstanceState.getInt(SONG_ID);
         play.setImageResource(playButtonImage);
         songImage.setImageResource(imageID);
         songName.setText(song);
@@ -305,6 +418,10 @@ public class NowPlayingActivity extends AppCompatActivity {
     // Return to previous activity
     @Override
     public boolean onSupportNavigateUp() {
+        if(songs.get(position).hasSong()) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+        }
         finish();
         return true;
     }
