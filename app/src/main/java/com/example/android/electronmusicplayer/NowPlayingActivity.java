@@ -231,8 +231,10 @@ public class NowPlayingActivity extends AppCompatActivity {
                 @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public boolean onLongClick(View v) {
-                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() - 5000);
-                    Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.rewind_pressed), Toast.LENGTH_SHORT).show();
+                    if(mediaPlayer.getCurrentPosition() < mediaPlayer.getDuration() - 6000) {
+                        mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() - 5000);
+                        Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.rewind_pressed), Toast.LENGTH_SHORT).show();
+                    }
                     return false;
                 }
             });
@@ -305,7 +307,7 @@ public class NowPlayingActivity extends AppCompatActivity {
                 @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public boolean onLongClick(View v) {
-                    if(mediaPlayer.getCurrentPosition() < mediaPlayer.getDuration() - 5000) {
+                    if(mediaPlayer.getCurrentPosition() < mediaPlayer.getDuration() - 6000) {
                         mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() + 5000);
                         Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.fast_forward_pressed), Toast.LENGTH_SHORT).show();
                     }
@@ -468,6 +470,13 @@ public class NowPlayingActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mediaPlayer.release();
+        mediaPlayer = null;
+    }
+
     //helper method to determine which image resource should be displayed for the play/pause button
     private void setButton() {
         if (isPlaying) {
@@ -615,5 +624,4 @@ public class NowPlayingActivity extends AppCompatActivity {
             mediaPlayer.setOnCompletionListener(completionListener);
         }
     }
-
 }
