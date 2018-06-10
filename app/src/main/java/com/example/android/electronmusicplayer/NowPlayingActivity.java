@@ -115,7 +115,16 @@ public class NowPlayingActivity extends AppCompatActivity {
                     songs.get(i).setIdentity(8);
                 }
                 break;
-
+            case 9:
+                albumZero();
+                albumOne();
+                albumTwo();
+                albumThree();
+                albumFour();
+                albumFive();
+                albumSix();
+                albumSeven();
+                break;
         }
 
         //initializes variables for all views in the layout
@@ -151,8 +160,46 @@ public class NowPlayingActivity extends AppCompatActivity {
             songID = songs.get(position).getSong();
             mediaPlayer = MediaPlayer.create(NowPlayingActivity.this, songID);
         }
-        if(identity != 8) {
+        if(identity != 8 && songs.get(position).hasSong()) {
             mediaPlayer.start();
+        }
+
+        if(songs.get(position).hasSong()) {
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    mediaPlayer.release();
+
+                    if (position < NowPlayingActivity.this.songs.size() - 1) {
+                        position += 1;
+                    } else {
+                        position = 0;
+                    }
+
+                    //gets the song information for the current selection
+                    imageID = NowPlayingActivity.this.songs.get(position).getImageId();
+                    song = NowPlayingActivity.this.songs.get(position).getMusicTitle();
+                    album = NowPlayingActivity.this.songs.get(position).getMusicDescription();
+                    songID = NowPlayingActivity.this.songs.get(position).getSong();
+
+                    //sets the song information to the views
+                    songImage.setImageResource(imageID);
+                    songName.setText(song);
+                    albumName.setText(album);
+
+                    //prepare media player to play song when user chooses another button
+                    songID = NowPlayingActivity.this.songs.get(position).getSong();
+                    //set the media player to the next song
+                    mediaPlayer = MediaPlayer.create(NowPlayingActivity.this, songID);
+                    mediaPlayer.start();
+
+                    isPlaying = true;
+                    setButton();
+                    play.setImageResource(playButtonImage);
+
+                    Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.next), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
         //creates functionality to allow user to skip backwards through all songs in the array list
@@ -349,8 +396,10 @@ public class NowPlayingActivity extends AppCompatActivity {
         allSongs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mediaPlayer.stop();
-                mediaPlayer.release();
+                if(songs.get(position).hasSong()) {
+                    mediaPlayer.stop();
+                    mediaPlayer.release();
+                }
                 Intent intent = new Intent(NowPlayingActivity.this, SongActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra(IDENTITY, identity);
@@ -429,9 +478,9 @@ public class NowPlayingActivity extends AppCompatActivity {
     //helper method to determine which image resource should be displayed for the play/pause button
     private void setButton() {
         if (isPlaying) {
-            playButtonImage = R.drawable.ic_play_circle_filled_black_48dp;
-        } else if(isPaused) {
             playButtonImage = R.drawable.ic_pause_circle_filled_black_48dp;
+        } else if(isPaused) {
+            playButtonImage = R.drawable.ic_play_circle_filled_black_48dp;
         }  else {
             playButtonImage = R.drawable.ic_play_circle_outline_black_48dp;
         }

@@ -75,7 +75,7 @@ public class SongActivity extends AppCompatActivity {
                 albumSeven();
                 //resets the identity of each song in the list to 8 in order to send the identity to the next activity
                 for(int i = 0; i < songs.size(); i++) {
-                    songs.get(i).setIdentity(8);
+                    songs.get(i).setIdentity(9);
                 }
                 break;
         }
