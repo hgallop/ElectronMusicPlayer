@@ -78,6 +78,20 @@ public class SongActivity extends AppCompatActivity {
                     songs.get(i).setIdentity(9);
                 }
                 break;
+            case 9:
+                albumZero();
+                albumOne();
+                albumTwo();
+                albumThree();
+                albumFour();
+                albumFive();
+                albumSix();
+                albumSeven();
+                //resets the identity of each song in the list to 8 in order to send the identity to the next activity
+                for(int i = 0; i < songs.size(); i++) {
+                    songs.get(i).setIdentity(9);
+                }
+                break;
         }
 
         //access the list layout

@@ -59,6 +59,13 @@ public class NowPlayingActivity extends AppCompatActivity {
     //variable for media player object
     MediaPlayer mediaPlayer;
 
+    private MediaPlayer.OnCompletionListener completionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mp) {
+            songEnded();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,6 +131,10 @@ public class NowPlayingActivity extends AppCompatActivity {
                 albumFive();
                 albumSix();
                 albumSeven();
+                //resets the identity of each song in the list to 8 in order to check the identity for the media player
+                for(int i = 0; i < songs.size(); i++) {
+                    songs.get(i).setIdentity(9);
+                }
                 break;
         }
 
@@ -165,41 +176,8 @@ public class NowPlayingActivity extends AppCompatActivity {
         }
 
         if(songs.get(position).hasSong()) {
-            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    mediaPlayer.release();
 
-                    if (position < NowPlayingActivity.this.songs.size() - 1) {
-                        position += 1;
-                    } else {
-                        position = 0;
-                    }
-
-                    //gets the song information for the current selection
-                    imageID = NowPlayingActivity.this.songs.get(position).getImageId();
-                    song = NowPlayingActivity.this.songs.get(position).getMusicTitle();
-                    album = NowPlayingActivity.this.songs.get(position).getMusicDescription();
-                    songID = NowPlayingActivity.this.songs.get(position).getSong();
-
-                    //sets the song information to the views
-                    songImage.setImageResource(imageID);
-                    songName.setText(song);
-                    albumName.setText(album);
-
-                    //prepare media player to play song when user chooses another button
-                    songID = NowPlayingActivity.this.songs.get(position).getSong();
-                    //set the media player to the next song
-                    mediaPlayer = MediaPlayer.create(NowPlayingActivity.this, songID);
-                    mediaPlayer.start();
-
-                    isPlaying = true;
-                    setButton();
-                    play.setImageResource(playButtonImage);
-
-                    Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.next), Toast.LENGTH_SHORT).show();
-                }
-            });
+            mediaPlayer.setOnCompletionListener(completionListener);
         }
 
         //creates functionality to allow user to skip backwards through all songs in the array list
@@ -209,6 +187,7 @@ public class NowPlayingActivity extends AppCompatActivity {
                 if(songs.get(position).hasSong()) {
                     mediaPlayer.stop();
                     mediaPlayer.release();
+                    mediaPlayer = null;
                 }
                 if (position > 0) {
                     position -= 1;
@@ -238,6 +217,10 @@ public class NowPlayingActivity extends AppCompatActivity {
                 play.setImageResource(playButtonImage);
 
                 Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.skip_back_pressed), Toast.LENGTH_SHORT).show();
+
+                if(songs.get(position).hasSong()) {
+                    mediaPlayer.setOnCompletionListener(completionListener);
+                }
             }
         });
 
@@ -322,8 +305,10 @@ public class NowPlayingActivity extends AppCompatActivity {
                 @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public boolean onLongClick(View v) {
-                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() + 5000);
-                    Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.fast_forward_pressed), Toast.LENGTH_SHORT).show();
+                    if(mediaPlayer.getCurrentPosition() < mediaPlayer.getDuration() - 5000) {
+                        mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() + 5000);
+                        Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.fast_forward_pressed), Toast.LENGTH_SHORT).show();
+                    }
                     return false;
                 }
             });
@@ -341,9 +326,10 @@ public class NowPlayingActivity extends AppCompatActivity {
         skipForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(songs.get(position).hasSong()) {
+                if (songs.get(position).hasSong()) {
                     mediaPlayer.stop();
                     mediaPlayer.release();
+                    mediaPlayer = null;
                 }
                 if (position < NowPlayingActivity.this.songs.size() - 1) {
                     position += 1;
@@ -355,14 +341,13 @@ public class NowPlayingActivity extends AppCompatActivity {
                 imageID = NowPlayingActivity.this.songs.get(position).getImageId();
                 song = NowPlayingActivity.this.songs.get(position).getMusicTitle();
                 album = NowPlayingActivity.this.songs.get(position).getMusicDescription();
-                songID = NowPlayingActivity.this.songs.get(position).getSong();
 
                 //sets the song information to the views
                 songImage.setImageResource(imageID);
                 songName.setText(song);
                 albumName.setText(album);
 
-                if(songs.get(position).hasSong()) {
+                if (songs.get(position).hasSong()) {
                     //prepare media player to play song when user chooses another button
                     songID = NowPlayingActivity.this.songs.get(position).getSong();
                     //set the media player to the next song
@@ -375,6 +360,10 @@ public class NowPlayingActivity extends AppCompatActivity {
                 play.setImageResource(playButtonImage);
 
                 Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.skip_forward_pressed), Toast.LENGTH_SHORT).show();
+
+                if (songs.get(position).hasSong()) {
+                    mediaPlayer.setOnCompletionListener(completionListener);
+                }
             }
         });
 
@@ -384,7 +373,6 @@ public class NowPlayingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(songs.get(position).hasSong()) {
                     mediaPlayer.stop();
-                    mediaPlayer.release();
                 }
                 Intent intent = new Intent(NowPlayingActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -399,6 +387,7 @@ public class NowPlayingActivity extends AppCompatActivity {
                 if(songs.get(position).hasSong()) {
                     mediaPlayer.stop();
                     mediaPlayer.release();
+                    mediaPlayer = null;
                 }
                 Intent intent = new Intent(NowPlayingActivity.this, SongActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -414,19 +403,22 @@ public class NowPlayingActivity extends AppCompatActivity {
                 if(songs.get(position).hasSong()) {
                     mediaPlayer.stop();
                     mediaPlayer.release();
+                    mediaPlayer = null;
                 }
                 Intent intent = new Intent(NowPlayingActivity.this, AlbumActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
+
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(songs.get(position).hasSong()) {
+        if(songs.get(position).hasSong() && mediaPlayer != null) {
             mediaPlayer.release();
+            mediaPlayer = null;
         }
     }
 
@@ -467,9 +459,10 @@ public class NowPlayingActivity extends AppCompatActivity {
     // Return to previous activity
     @Override
     public boolean onSupportNavigateUp() {
-        if(songs.get(position).hasSong()) {
+        if(songs.get(position).hasSong() && mediaPlayer != null) {
             mediaPlayer.stop();
             mediaPlayer.release();
+            mediaPlayer = null;
         }
         finish();
         return true;
@@ -583,4 +576,44 @@ public class NowPlayingActivity extends AppCompatActivity {
                     getResources().getString(R.string.generic_seven), 7));
         }
     }
+
+    private void songEnded() {
+        mediaPlayer.release();
+        mediaPlayer = null;
+
+        if (position < NowPlayingActivity.this.songs.size() - 1) {
+            position += 1;
+        } else {
+            position = 0;
+        }
+
+        //gets the song information for the current selection
+        imageID = NowPlayingActivity.this.songs.get(position).getImageId();
+        song = NowPlayingActivity.this.songs.get(position).getMusicTitle();
+        album = NowPlayingActivity.this.songs.get(position).getMusicDescription();
+
+        //sets the song information to the views
+        songImage.setImageResource(imageID);
+        songName.setText(song);
+        albumName.setText(album);
+
+        if (songs.get(position).hasSong()){
+            //prepare media player to play song when user chooses another button
+            songID = NowPlayingActivity.this.songs.get(position).getSong();
+            //set the media player to the next song
+            mediaPlayer = MediaPlayer.create(NowPlayingActivity.this, songID);
+            mediaPlayer.start();
+        }
+
+        isPlaying = true;
+        setButton();
+        play.setImageResource(playButtonImage);
+
+        Toast.makeText(NowPlayingActivity.this, getResources().getString(R.string.next), Toast.LENGTH_SHORT).show();
+
+        if(songs.get(position).hasSong()) {
+            mediaPlayer.setOnCompletionListener(completionListener);
+        }
+    }
+
 }
